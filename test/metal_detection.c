@@ -90,7 +90,7 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-  const uint16_t FREQUENCY_DIFFERENCE = 500;
+  const uint16_t FREQUENCY_DIFFERENCE = 50;
   const uint16_t TIME_INTERVAL = 100;
   const uint16_t DATA_SIZE = 10;
 
@@ -125,7 +125,7 @@ int main(void)
       }
       previous_state = current_state;
     }
-    frequency /= (TIME_INTERVAL / 1000);
+    frequency *= 10;
 
     if (!frequency_flag)
     {
