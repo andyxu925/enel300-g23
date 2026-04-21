@@ -53,28 +53,46 @@
 \tableofcontents
 
 \section{Abstract}
+The purpose of this project was to create a radio-controlled vehicle for a competition at the end of the semester. The requirements of the vehicle were to be able to move wirelessly, detect copper plates, and measure the distance of nearby objects. The final project used skills integrated from mechanical, software, and electrical engineering concepts.
+
+The vehicle used both an STM32 microcontroller and an ESP32 module to create a reliable and efficient control system. Firstly, the ESP32 was controlled through a smartphone webserver interface developed in Visual Studio Code. The ESP32 was responsible for motor control and headlight operation. Then, the STM32 controlled the ultrasonic distance sensing and the metal detection functions. For steering, the vehicle used a tank steering system, where the left and right motors were controlled independently for improved maneuverability.
+
+A custom 3D-printed chassis was designed in Fusion 360, ensuring the ability to mount all major components. For example, the metal detection coil was placed underneath the vehicle, the PCBs were mounted on the body, and the headlights and distance sensor were positioned at the front of the vehicle. This project included two custom PCBs: one for metal detection connected to the STM32, and one for motor control and power management connected to the ESP32. The system was powered by a 12 V battery with battery protection and reverse-polarity protection circuitry.
+
+Key challenges included improving the metal detection system, configuring the STM32 code for proper sensor operation, and ensuring all components fit correctly within the chassis. The completed vehicle successfully demonstrated wireless control, tank steering movement, distance sensing, headlight control, and metal detection. The final design met the main project objectives while providing practical experience in embedded systems, PCB design, programming, and mechanical integration.
 
 \section{Background}
 
 \section{Detailed Design}
 
-\subsubsection{Electrical Architecture}
+\subsection{Electrical Architecture}
 
-\subsubsection{Metal Detector, Distance Sensing, and Motor Drive Circuits}
+\subsection{Metal Detector, Distance Sensing, and Motor Drive Circuits}
+Originally, for the motor driver circuit we used the L298N which was given to us in ENGG 200 as a place holder for the PCB board. We decided to place this circuit onto a PCB board to fulfill the PCB requirements for the project. For the motor driver circuit, we decided to use the circuit shown in the technical workshop as we had already built this one for the workshop. A design iteration that we did explore for this PCB board was soldering the ESP32 module right onto the board, but this limited our access to the esp32 with a cable. We switched this to an ESP32 devboard which slotted in with pin headers and allowed us to switch the esp32 if needed. Also, this PCB board was switched from a 2 layer to a 4-layer board to allow for better power dissipation and more room for copper pours. To validate this PCB board, we first checked to see if there were any shorts on the board, then tested the outputs on the buck convertor, then tested our motors to see if the circuit worked. Once soldered correctly, the circuit board worked on the first iteration and performed as expected in simulations. The temperatures of the motor driver's ICs were also monitored to ensure there was proper heat dissipation.
 
-\subsubsection{Power Management}
+\subsection{Power Management}
+On the vehicle, there are three voltage levels which are 12V, 5V, and 3.3V. We decided to use 12V because this would allow us to use higher voltage motors, which would ensure we have enough power to make the steep climb. The 5V power rail was used to supply power to the voltage regulator on the esp32 board and power the stm32 microcontroller board. The 3V3 power rail was used to power the esp32 microcontroller and provide a high logic level to the motor driver ICs.
 
-\subsubsection{Printed Circuit Board Design}
+The battery was a 12V 2800mAh rechargeable battery which supplied more than enough power and current for our vehicle. With the total capacity of the battery being 2800mAh and estimating an average current draw of 500mA, this would put our runtime at 5.6 hours.
 
-\subsubsection{Remote Controller Design}
+The maximum power draw for each motor is 13.54W according to the datasheet. The motor driver ICs chosen can provide over 40W of power which means we are supplying enough power to the motors. At 12V, the motors would have a stall current of around 1.1A and our battery is able to supply this amount of current while our motor drivers can handle up to 3.5A.
 
-\subsubsection{Software Architecture}
+For circuit board protection, there is a fuse to limit current and reverse polarity protection. For the fuse, it is a fuse blade so if the fuse breaks, we can switch it out if needed with ease and it is set at 5A which is the maximum current our battery can provide. The reverse polarity protection can prevent the board from damage if the battery is plugged in the incorrect way.
 
-\subsubsection{Software Design}
+\subsection{Printed Circuit Board Design}
+The functions integrated on the first printed circuit board design include a buck converter to turn the 12V from the battery to 5V, integrated circuit protection, and a motor driver circuit. For this printed circuit board, there are 5 2-port screw terminals to allow for high current flow and a secure connection. Two of these ports are used to supply the motors with current, one of the ports is used to plug in the battery, one of the ports is used to plug in our led headlights, and the last port is used to supply a 5V supply for our stm32 board. Another connection interface used for the PCB board was 2 20-pin headers to connect our esp32 board to the PCB board.
 
-\subsubsection{Mechanical Architecture}
+For thermal design considerations, I decided to use a 4-layer board to allow for a power plate that contained copper pours for 12V power, 5V power, and 3.3V power.  Two of the plates were used for signal tracing, and the final plate was used as a ground copper pour. I also decided to use copper pours by the fuse into the circuit protection as this would be where most of the current is flowing into the circuit board. To allow for power dissipation, I used 0.8mm vias and placed extra vias on the larger pads and the ground pad of the motor driver ICs. For layout decisions, I decided to place the battery protection pieces at the bottom of the board where the battery is connected. I decided to place the motor driver's ICs on the left and right side of the board and the buck converter near the middle of the board. This allowed me to keep the high heat pieces separated from each other and allow for space for each circuit. I also used thick 2mm traces for high current routes and copper pours for each of the power voltage connections.
 
-\subsubsection{Mechanical Design}
+\subsection{Remote Controller Design}
+
+\subsection{Software Architecture}
+
+\subsection{Software Design}
+
+\subsection{Mechanical Architecture}
+
+\subsection{Mechanical Design}
 
 \section{References}
 
