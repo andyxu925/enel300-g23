@@ -86,6 +86,44 @@ Key challenges included improving the metal detection system, configuring the ST
 \section{Detailed Design}
 
 \subsection{Electrical Architecture}
+The electrical block diagram is shown \autoref{fig:ebd}.
+\begin{figure}
+    \centering
+    \begin{tikzpicture}[thick,>={Stealth}]
+        \draw
+        (0,0) node[draw,rectangle,align=center](bat){Battery\\12 V}
+        (0,-2) node[draw,rectangle,align=center](buck){Buck converter\\AP63205WU-7}
+        (0,-4) node[draw,rectangle,align=center](esp){MCU\\ESP32-WROOM-32}
+        (0,-6) node[draw,rectangle,align=center](h){Headlights}
+        (8,2) node[draw,rectangle,align=center](md1){Motor driver\\DRV8251ADDAR}
+        (12,2) node[draw,rectangle,align=center](m1){Motor\\PAN14EE12MD}
+        (8,0) node[draw,rectangle,align=center](md2){Motor driver\\DRV8251ADDAR}
+        (12,0) node[draw,rectangle,align=center](m2){Motor\\PAN14EE12MD}
+        (8,-10) node[draw,rectangle,align=center](stm){MCU\\STM32F446RE}
+        (0,-8) node[draw,rectangle,align=center](us){Ultrasonic sensor\\HC-SR04}
+        (0,-10) node[draw,rectangle,align=center](scr){Display screen\\LCD1602}
+        (8,-8) node[draw,rectangle,align=center](t){Timer\\NA555DR}
+        (12,-8) node[draw,rectangle,align=center](c){Metal coil}
+        (12,-10) node[draw,rectangle,align=center](b){Buzzer\\CMI-0955-03TH};
+        \draw[<->] (stm.north) -- (t.south);
+        \draw[->] (stm.east) -- (b.west);
+        \draw[<->] (t.east) -- (c.west);
+        \draw[->] (bat.east) -- ++(4,0) |- (md1.west);
+        \draw[->] (bat.east) -- ++(4,0) |- (md2.west);
+        \draw[->] (esp.south) -- (h.north);
+        \draw[->] (bat.south) -- (buck.north);
+        \draw[->] (buck.south) -- (esp.north);
+        \draw[->] (buck.west) -- ++(-1,0) -- ++(0,-10) -| (stm.south);
+        \draw[->] (esp.east) -- ++(2,0) |- ($(md1.west)+(0,+.25)$);
+        \draw[->] (esp.east) -| (md2.south);
+        \draw[->] (stm.west) -- ++(-2,0) |- (scr.east);
+        \draw[<-] ($(stm.west)+(0,.25)$) -- ++(-2,0) |- (us.east);
+        \draw[->] (md1.east) -- (m1.west);
+        \draw[->] (md2.east) -- (m2.west);
+    \end{tikzpicture}
+    \caption{Electrical block diagram for the design}
+    \label{fig:ebd}
+\end{figure}
 
 \subsection{Metal Detector, Distance Sensing, and Motor Drive Circuits}
 Originally, for the motor driver circuit we used the L298N which was given to us in ENGG 200 as a place holder for the PCB board. We decided to place this circuit onto a PCB board to fulfill the PCB requirements for the project. For the motor driver circuit, we decided to use the circuit shown in the technical workshop as we had already built this one for the workshop. A design iteration that we did explore for this PCB board was soldering the esp32 module right onto the board, but this limited our access to the esp32 with a cable. We switched this to an esp32 devboard which slotted in with pin headers and allowed us to switch the esp32 if needed. Also, this PCB board was switched from a 2 layer to a 4-layer board to allow for better power dissipation and more room for copper pours. To validate this PCB board, we first checked to see if there were any shorts on the board, then tested the outputs on the buck convertor, then tested our motors to see if the circuit worked. Once soldered correctly, the circuit board worked on the first iteration and performed as expected in simulations. The temperatures of the motor driver's ICs were also monitored to ensure there was proper heat dissipation.

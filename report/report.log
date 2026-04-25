@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.10.9)  24 APR 2026 20:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.10.9)  24 APR 2026 21:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -658,37 +658,40 @@ l.81
       [1]
 
 [2]
-<m11.png, id=114, 1927.2pt x 1084.05pt>
-File: m11.png Graphic file (type png)
-<use m11.png>
-Package pdftex.def Info: m11.png  used on input line 118.
-(pdftex.def)             Requested size: 469.75502pt x 264.22992pt.
-
 
 [3]
-<m12.png, id=120, 1927.2pt x 1084.05pt>
+
+[4]
+<m11.png, id=125, 1927.2pt x 1084.05pt>
+File: m11.png Graphic file (type png)
+<use m11.png>
+Package pdftex.def Info: m11.png  used on input line 156.
+(pdftex.def)             Requested size: 469.75502pt x 264.22992pt.
+<m12.png, id=127, 1927.2pt x 1084.05pt>
 File: m12.png Graphic file (type png)
 <use m12.png>
-Package pdftex.def Info: m12.png  used on input line 125.
+Package pdftex.def Info: m12.png  used on input line 163.
 (pdftex.def)             Requested size: 469.75502pt x 264.22992pt.
-<m21.png, id=121, 1927.2pt x 1084.05pt>
+
+
+[5 <./m11.png>]
+<m21.png, id=133, 1927.2pt x 1084.05pt>
 File: m21.png Graphic file (type png)
 <use m21.png>
-Package pdftex.def Info: m21.png  used on input line 132.
+Package pdftex.def Info: m21.png  used on input line 170.
 (pdftex.def)             Requested size: 469.75502pt x 264.22992pt.
-
-
-[4 <./m11.png> <./m12.png>]
-<m22.png, id=128, 1927.2pt x 1084.05pt>
+<m22.png, id=134, 1927.2pt x 1084.05pt>
 File: m22.png Graphic file (type png)
 <use m22.png>
-Package pdftex.def Info: m22.png  used on input line 139.
+Package pdftex.def Info: m22.png  used on input line 177.
 (pdftex.def)             Requested size: 469.75502pt x 264.22992pt.
 
 
-[5 <./m21.png> <./m22.png>]
+[6 <./m12.png> <./m21.png>]
 
-[6] (./report.aux)
+[7 <./m22.png>]
+
+[8] (./report.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
@@ -697,19 +700,19 @@ Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: 48F0A950847ECFA46AB1F91D49066637;2180.
  ) 
 Here is how much of TeX's memory you used:
- 20187 strings out of 467747
- 379696 string characters out of 5431117
- 777306 words of memory out of 5000000
- 48539 multiletter control sequences out of 15000+600000
+ 20301 strings out of 467747
+ 381252 string characters out of 5431117
+ 777367 words of memory out of 5000000
+ 48650 multiletter control sequences out of 15000+600000
  657840 words of font info for 61 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,8n,91p,1239b,731s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,9n,91p,1239b,765s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2025/texmf-dist/fonts/type1/public/tex-gyre/qhvb.pfb><c:/texlive/
 2025/texmf-dist/fonts/type1/public/tex-gyre/qhvr.pfb>
-Output written on report.pdf (7 pages, 524446 bytes).
+Output written on report.pdf (9 pages, 527846 bytes).
 PDF statistics:
- 163 PDF objects out of 1000 (max. 8388607)
- 138 compressed objects within 2 object streams
- 30 named destinations out of 1000 (max. 500000)
+ 175 PDF objects out of 1000 (max. 8388607)
+ 148 compressed objects within 2 object streams
+ 33 named destinations out of 1000 (max. 500000)
  150 words of extra memory for PDF output out of 10000 (max. 10000000)
 
