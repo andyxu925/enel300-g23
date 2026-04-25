@@ -1,56 +1,76 @@
-\documentclass{article}
+\documentclass[11pt]{article}
 
 \usepackage{calc}
+\usepackage{float}
 \usepackage[margin=1in]{geometry}
 \usepackage{graphicx}
 \usepackage{hyperref}
+\usepackage{parskip}
+\usepackage{tikz}
 \usepackage{tgheros}
-\hypersetup{hidelinks}
+\usepackage{xcolor}
+\hypersetup{colorlinks=true,allcolors=userteal}
+\floatplacement{table}{H}
+\floatplacement{figure}{H}
+\definecolor{userteal}{HTML}{47a67c}
+\usetikzlibrary{arrows.meta,calc}
 
 \renewcommand{\familydefault}{\sfdefault}
 
 \begin{document}
 \begin{titlepage}
     \Huge{\textbf{ENEL300}}
-    
+
     \vspace{0.25\baselineskip}
-    
+
     \Large{Electrical and Computer Engineering Professional Skills}
-    
+
     \rule{\widthof{Radio-Controlled Car with Metal Detection and Distance Sensing}}{2pt}
-    
+
     \vspace{0.25\baselineskip}
-    
+
     \Huge{\textbf{Final Design Report}}
-    
+
     \vspace{0.25\baselineskip}
-    
+
     \Large{Radio-Controlled Car with Metal Detection and Distance Sensing}
-    
+
+    \vspace{0.25\baselineskip}
+
+    \Large{\today}
+
     \vspace{\fill}
 
+    \raggedright
+    \begin{minipage}[c]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{Logo_Vert_Black.eps}
+    \end{minipage}%
+    \begin{minipage}[c]{0.5\textwidth}
     \raggedleft
-    
+
     \Huge{\textbf{Group 23}}
-    
+
     \vspace{-0.25\baselineskip}
 
     \rule{\widthof{\LARGE{Dustin Christensen}}}{2pt}
-    
+
     \vspace{0.25\baselineskip}
-    
+
     \LARGE{Dustin Christensen}
-    
+
     \LARGE{Nick Mulligan}
-    
+
     \LARGE{Brian Oh}
-    
+
     \LARGE{Diana Raduta}
-    
+
     \LARGE{Andy Xu}
+    \end{minipage}
 \end{titlepage}
 
 \tableofcontents
+\listoffigures
+\listoftables
 
 \section{Abstract}
 The purpose of this project was to create a radio-controlled vehicle for a competition at the end of the semester. The requirements of the vehicle were to be able to move wirelessly, detect copper plates, and measure the distance of nearby objects. The final project used skills integrated from mechanical, software, and electrical engineering concepts.
@@ -68,7 +88,7 @@ Key challenges included improving the metal detection system, configuring the ST
 \subsection{Electrical Architecture}
 
 \subsection{Metal Detector, Distance Sensing, and Motor Drive Circuits}
-Originally, for the motor driver circuit we used the L298N which was given to us in ENGG 200 as a place holder for the PCB board. We decided to place this circuit onto a PCB board to fulfill the PCB requirements for the project. For the motor driver circuit, we decided to use the circuit shown in the technical workshop as we had already built this one for the workshop. A design iteration that we did explore for this PCB board was soldering the ESP32 module right onto the board, but this limited our access to the esp32 with a cable. We switched this to an ESP32 devboard which slotted in with pin headers and allowed us to switch the esp32 if needed. Also, this PCB board was switched from a 2 layer to a 4-layer board to allow for better power dissipation and more room for copper pours. To validate this PCB board, we first checked to see if there were any shorts on the board, then tested the outputs on the buck convertor, then tested our motors to see if the circuit worked. Once soldered correctly, the circuit board worked on the first iteration and performed as expected in simulations. The temperatures of the motor driver's ICs were also monitored to ensure there was proper heat dissipation.
+Originally, for the motor driver circuit we used the L298N which was given to us in ENGG 200 as a place holder for the PCB board. We decided to place this circuit onto a PCB board to fulfill the PCB requirements for the project. For the motor driver circuit, we decided to use the circuit shown in the technical workshop as we had already built this one for the workshop. A design iteration that we did explore for this PCB board was soldering the esp32 module right onto the board, but this limited our access to the esp32 with a cable. We switched this to an esp32 devboard which slotted in with pin headers and allowed us to switch the esp32 if needed. Also, this PCB board was switched from a 2 layer to a 4-layer board to allow for better power dissipation and more room for copper pours. To validate this PCB board, we first checked to see if there were any shorts on the board, then tested the outputs on the buck convertor, then tested our motors to see if the circuit worked. Once soldered correctly, the circuit board worked on the first iteration and performed as expected in simulations. The temperatures of the motor driver's ICs were also monitored to ensure there was proper heat dissipation.
 
 \subsection{Power Management}
 On the vehicle, there are three voltage levels which are 12V, 5V, and 3.3V. We decided to use 12V because this would allow us to use higher voltage motors, which would ensure we have enough power to make the steep climb. The 5V power rail was used to supply power to the voltage regulator on the esp32 board and power the stm32 microcontroller board. The 3V3 power rail was used to power the esp32 microcontroller and provide a high logic level to the motor driver ICs.
@@ -91,6 +111,90 @@ For thermal design considerations, I decided to use a 4-layer board to allow for
 \subsection{Software Design}
 
 \subsection{Mechanical Architecture}
+Two distinct mechanical designs will be discussed. The first design (see \autoref{fig:m11} and \autoref{fig:m12}) was the initial concept implemented, later redesigned to the second design shown (see \autoref{fig:m21} and \autoref{fig:m22}) in response to certain challenges related to the mechanical system observed throughout the development of the project. For the following diagrams, the housing for the gearbox on one side is omitted to show the gear reduction used in each design.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{m11.png}
+    \caption{Drawing of the initial design (1)}
+    \label{fig:m11}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{m12.png}
+    \caption{Drawing of the initial design (2)}
+    \label{fig:m12}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{m21.png}
+    \caption{Drawing of the final design (1)}
+    \label{fig:m21}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{m22.png}
+    \caption{Drawing of the final design (2)}
+    \label{fig:m22}
+\end{figure}
+
+The mechanical block diagram for the initial design is shown in \autoref{fig:mbd1}.
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}[thick,>={Stealth}]
+        \draw
+        (0,0) node[draw,rectangle,align=center](m){Motor\\PAN14EE12MD\\12800 rpm}
+        (0,-2) node[draw,rectangle,align=center](gs1){Gear Stage (1)\\3:1 reduction\\4267 rpm}
+        (4,-2) node[draw,rectangle,align=center](gs2){Gear Stage (2)\\3:1 reduction\\1422 rpm}
+        (8,-2) node[draw,rectangle,align=center](gs3){Gear Stage (3)\\3:1 reduction\\474 rpm}
+        (12,-4) node[draw,rectangle,align=center](w){Wheel};
+        \draw
+        (gs1.west) ++(0,-1) -- ++(0,-.5) -- node[below,align=center]{Total gear reduction\\27:1} ($(gs3.east)+(0,-1.5)$) -- ++(0,.5);
+        \draw[->]
+        (m.south) -- (gs1.north);
+        \draw[->]
+        (gs1.east) -- (gs2.west);
+        \draw[->]
+        (gs2.east) -- (gs3.west);
+        \draw[->]
+        (gs3.east) -| (w.north);
+    \end{tikzpicture}
+    \caption{Mechanical block diagram for the initial design}
+    \label{fig:mbd1}
+\end{figure}
+
+The mechanical block diagram for the final design is shown in \autoref{fig:mbd2}.
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}[thick,>={Stealth}]
+        \draw
+        (0,0) node[draw,rectangle,align=center](m){Motor\\PAN14EE12MD\\12800 rpm}
+        (0,-2) node[draw,rectangle,align=center](gs1){Gear Stage (1)\\3:1 reduction\\4267 rpm}
+        (4,-2) node[draw,rectangle,align=center](gs2){Gear Stage (2)\\3:1 reduction\\1422 rpm}
+        (4,-4) node[draw,rectangle,align=center](gs3){Gear Stage (3)\\3:1 reduction\\474 rpm}
+        (0,-4) node[draw,rectangle,align=center](gs4){Gear Stage (4)\\3:1 reduction\\158 rpm}
+        (-4,-6) node[draw,rectangle,align=center](w){Wheel};
+        \draw
+        (gs3.east) ++(0,-1) -- ++(0,-.5) -- node[below,align=center]{Total gear reduction\\81:1} ($(gs4.west)+(0,-1.5)$) -- ++(0,.5);
+        \draw[->]
+        (m.south) -- (gs1.north);
+        \draw[->]
+        (gs1.east) -- (gs2.west);
+        \draw[->]
+        (gs2.south) -- (gs3.north);
+        \draw[->]
+        (gs3.west) -- (gs4.east);
+        \draw[->]
+        (gs4.west) -| (w.north);
+    \end{tikzpicture}
+    \caption{Mechanical block diagram for the final design}
+    \label{fig:mbd2}
+\end{figure}
 
 \subsection{Mechanical Design}
 
