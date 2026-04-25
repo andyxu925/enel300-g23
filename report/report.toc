@@ -10,5 +10,5 @@
 \contentsline {subsection}{\numberline {3.7}Software Design}{5}{subsection.3.7}%
 \contentsline {subsection}{\numberline {3.8}Mechanical Architecture}{5}{subsection.3.8}%
 \contentsline {subsection}{\numberline {3.9}Mechanical Design}{8}{subsection.3.9}%
-\contentsline {section}{\numberline {4}References}{8}{section.4}%
-\contentsline {section}{\numberline {5}Appendices}{8}{section.5}%
+\contentsline {section}{\numberline {4}References}{10}{section.4}%
+\contentsline {section}{\numberline {5}Appendices}{10}{section.5}%
