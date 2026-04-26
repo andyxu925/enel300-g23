@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.10.9)  25 APR 2026 19:28
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.10.9)  25 APR 2026 19:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -810,8 +810,8 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.81 
-      [1]
+l.77 \newpage
+              [1]
 
 [2]
 
@@ -820,92 +820,99 @@ l.81
 [4]
 
 [5]
+
+[6]
 LaTeX Font Info:    Trying to load font information for TS1+qhv on input line 2
-10.
+16.
  (c:/texlive/2025/texmf-dist/tex/latex/tex-gyre/ts1qhv.fd
 File: ts1qhv.fd 2009/09/25 v1.2 font definition file for TS1/qhv
 )
 
-[6{c:/texlive/2025/texmf-dist/fonts/enc/dvips/tex-gyre/q-ts1.enc}]
-<m11.png, id=146, 1927.2pt x 1084.05pt>
+[7{c:/texlive/2025/texmf-dist/fonts/enc/dvips/tex-gyre/q-ts1.enc}]
+<m11.png, id=150, 1927.2pt x 1084.05pt>
 File: m11.png Graphic file (type png)
 <use m11.png>
-Package pdftex.def Info: m11.png  used on input line 217.
+Package pdftex.def Info: m11.png  used on input line 223.
 (pdftex.def)             Requested size: 469.75502pt x 264.22992pt.
-<m12.png, id=148, 1927.2pt x 1084.05pt>
+<m12.png, id=152, 1927.2pt x 1084.05pt>
 File: m12.png Graphic file (type png)
 <use m12.png>
-Package pdftex.def Info: m12.png  used on input line 224.
+Package pdftex.def Info: m12.png  used on input line 230.
 (pdftex.def)             Requested size: 469.75502pt x 264.22992pt.
 
 
-[7 <./m11.png>]
-<m21.png, id=155, 1927.2pt x 1084.05pt>
+[8 <./m11.png>]
+<m21.png, id=159, 1927.2pt x 1084.05pt>
 File: m21.png Graphic file (type png)
 <use m21.png>
-Package pdftex.def Info: m21.png  used on input line 231.
+Package pdftex.def Info: m21.png  used on input line 237.
 (pdftex.def)             Requested size: 469.75502pt x 264.22992pt.
-<m22.png, id=156, 1927.2pt x 1084.05pt>
+<m22.png, id=160, 1927.2pt x 1084.05pt>
 File: m22.png Graphic file (type png)
 <use m22.png>
-Package pdftex.def Info: m22.png  used on input line 238.
+Package pdftex.def Info: m22.png  used on input line 244.
 (pdftex.def)             Requested size: 469.75502pt x 264.22992pt.
 
 
-[8 <./m12.png> <./m21.png>]
+[9 <./m12.png> <./m21.png>]
 
-[9 <./m22.png>]
-
-[10]
+[10 <./m22.png>]
 
 [11]
-<f1.png, id=182, 469.755pt x 352.31625pt>
-File: f1.png Graphic file (type png)
-<use f1.png>
-Package pdftex.def Info: f1.png  used on input line 341.
-(pdftex.def)             Requested size: 469.75502pt x 352.31538pt.
-
 
 [12]
-<f2.png, id=188, 469.755pt x 352.31625pt>
+
+[13]
+
+[14]
+<f1.png, id=195, 469.755pt x 352.31625pt>
+File: f1.png Graphic file (type png)
+<use f1.png>
+Package pdftex.def Info: f1.png  used on input line 352.
+(pdftex.def)             Requested size: 469.75502pt x 352.31538pt.
+<f2.png, id=196, 469.755pt x 352.31625pt>
 File: f2.png Graphic file (type png)
 <use f2.png>
-Package pdftex.def Info: f2.png  used on input line 347.
+Package pdftex.def Info: f2.png  used on input line 358.
 (pdftex.def)             Requested size: 469.75502pt x 352.31538pt.
 
 
-[13 <./f1.png>]
-<f3.png, id=194, 469.755pt x 352.31625pt>
+[15 <./f1.png>]
+<f3.png, id=202, 469.755pt x 352.31625pt>
 File: f3.png Graphic file (type png)
 <use f3.png>
-Package pdftex.def Info: f3.png  used on input line 353.
+Package pdftex.def Info: f3.png  used on input line 364.
 (pdftex.def)             Requested size: 469.75502pt x 352.31538pt.
 
 
-[14 <./f2.png>]
+[16 <./f2.png>]
 
-[15 <./f3.png>] (./report.aux)
+[17 <./f3.png>] (./report.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
  ***********
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: 48F0A950847ECFA46AB1F91D49066637;2180.
  ) 
 Here is how much of TeX's memory you used:
- 23704 strings out of 467747
- 466234 string characters out of 5431117
- 863763 words of memory out of 5000000
+ 23706 strings out of 467747
+ 466248 string characters out of 5431117
+ 862763 words of memory out of 5000000
  52015 multiletter control sequences out of 15000+600000
  658206 words of font info for 62 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,9n,132p,2037b,1107s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2025/texmf-dist/fonts/type1/public/tex-gyre/qhvb.pfb><c:/texlive/
 2025/texmf-dist/fonts/type1/public/tex-gyre/qhvr.pfb>
-Output written on report.pdf (16 pages, 1807836 bytes).
+Output written on report.pdf (18 pages, 1808192 bytes).
 PDF statistics:
- 233 PDF objects out of 1000 (max. 8388607)
- 192 compressed objects within 2 object streams
- 45 named destinations out of 1000 (max. 500000)
+ 241 PDF objects out of 1000 (max. 8388607)
+ 198 compressed objects within 2 object streams
+ 47 named destinations out of 1000 (max. 500000)
  165 words of extra memory for PDF output out of 10000 (max. 10000000)
 

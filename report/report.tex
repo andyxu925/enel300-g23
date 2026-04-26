@@ -74,6 +74,8 @@
 \listoffigures
 \listoftables
 
+\newpage
+
 \section{Abstract}
 The purpose of this project was to create a radio-controlled vehicle for a competition at the end of the semester. The requirements of the vehicle were to be able to move wirelessly, detect copper plates, and measure the distance of nearby objects. The final project used skills integrated from mechanical, software, and electrical engineering concepts.
 
@@ -83,7 +85,11 @@ A custom 3D-printed chassis was designed in Fusion 360, ensuring the ability to 
 
 Key challenges included improving the metal detection system, configuring the STM32 code for proper sensor operation, and ensuring all components fit correctly within the chassis. The completed vehicle successfully demonstrated wireless control, tank steering movement, distance sensing, headlight control, and metal detection. The final design met the main project objectives while providing practical experience in embedded systems, PCB design, programming, and mechanical integration.
 
+\newpage
+
 \section{Background}
+
+\newpage
 
 \section{Detailed Design}
 
@@ -94,18 +100,18 @@ The electrical block diagram is shown in \autoref{fig:ebd}.
     \begin{tikzpicture}[thick,>={Stealth}]
         \draw
         (0,0) node[draw,rectangle,align=center](bat){Battery\\12 V}
-        (0,-2) node[draw,rectangle,align=center](buck){Buck converter\\AP63205WU-7}
+        (0,-2) node[draw,rectangle,align=center](buck){Buck Converter\\AP63205WU-7}
         (0,-4) node[draw,rectangle,align=center](esp){MCU\\ESP32-WROOM-32}
         (0,-6) node[draw,rectangle,align=center](h){Headlights}
-        (8,2) node[draw,rectangle,align=center](md1){Motor driver\\DRV8251ADDAR}
+        (8,2) node[draw,rectangle,align=center](md1){Motor Driver\\DRV8251ADDAR}
         (12,2) node[draw,rectangle,align=center](m1){Motor\\PAN14EE12MD}
-        (8,0) node[draw,rectangle,align=center](md2){Motor driver\\DRV8251ADDAR}
+        (8,0) node[draw,rectangle,align=center](md2){Motor Driver\\DRV8251ADDAR}
         (12,0) node[draw,rectangle,align=center](m2){Motor\\PAN14EE12MD}
         (8,-10) node[draw,rectangle,align=center](stm){MCU\\STM32F446RE}
-        (0,-8) node[draw,rectangle,align=center](us){Ultrasonic sensor\\HC-SR04}
-        (0,-10) node[draw,rectangle,align=center](scr){Display screen\\LCD1602}
+        (0,-8) node[draw,rectangle,align=center](us){Ultrasonic Sensor\\HC-SR04}
+        (0,-10) node[draw,rectangle,align=center](scr){Display Screen\\LCD1602}
         (8,-8) node[draw,rectangle,align=center](t){Timer\\NA555DR}
-        (12,-8) node[draw,rectangle,align=center](c){Metal coil}
+        (12,-8) node[draw,rectangle,align=center](c){Metal Coil}
         (12,-10) node[draw,rectangle,align=center](b){Buzzer\\CMI-0955-03TH};
         \draw[<->] (stm.north) -- (t.south);
         \draw[->] (stm.east) -- (b.west);
@@ -166,21 +172,21 @@ The software block diagram for the movement systems of the design is shown in \a
         thick
     ]
 
-    \node[block] (remote) {User device/browser};
+    \node[block] (remote) {User Device/Browser};
 
     \node[block, below=of remote] (wifi) {WiFi};
 
-    \node[block, below=of wifi] (webserver) {HTTP web server};
+    \node[block, below=of wifi] (webserver) {HTTP Web Server};
 
-    \node[block, below=of webserver] (handler) {Request handler};
+    \node[block, below=of webserver] (handler) {Request Handler};
 
-    \node[block, below=of handler] (logic) {Control logic};
+    \node[block, below=of handler] (logic) {Control Logic};
 
-    \node[block, below left=of logic] (motor) {Motor control \\ (Throttle/steering)};
+    \node[block, below left=of logic] (motor) {Motor Control \\ (Throttle/Steering)};
 
-    \node[block, below=of logic] (dac) {DAC output};
+    \node[block, below=of logic] (dac) {DAC Output};
 
-    \node[block, below right=of logic] (LED) {LED control};
+    \node[block, below right=of logic] (LED) {LED Control};
 
     \node[block, below=of motor] (pwm) {LEDC PWM};
 
@@ -247,12 +253,12 @@ The mechanical block diagram for the initial design is shown in \autoref{fig:mbd
     \begin{tikzpicture}[thick,>={Stealth}]
         \draw
         (0,0) node[draw,rectangle,align=center](m){Motor\\PAN14EE12MD\\12800 rpm}
-        (0,-2) node[draw,rectangle,align=center](gs1){Gear Stage (1)\\3:1 reduction\\4267 rpm}
-        (4,-2) node[draw,rectangle,align=center](gs2){Gear Stage (2)\\3:1 reduction\\1422 rpm}
-        (8,-2) node[draw,rectangle,align=center](gs3){Gear Stage (3)\\3:1 reduction\\474 rpm}
+        (0,-2) node[draw,rectangle,align=center](gs1){Gear Stage (1)\\3:1 Reduction\\4267 rpm}
+        (4,-2) node[draw,rectangle,align=center](gs2){Gear Stage (2)\\3:1 Reduction\\1422 rpm}
+        (8,-2) node[draw,rectangle,align=center](gs3){Gear Stage (3)\\3:1 Reduction\\474 rpm}
         (12,-4) node[draw,rectangle,align=center](w){Wheel};
         \draw
-        (gs1.west) ++(0,-1) -- ++(0,-.5) -- node[below,align=center]{Total gear reduction\\27:1} ($(gs3.east)+(0,-1.5)$) -- ++(0,.5);
+        (gs1.west) ++(0,-1) -- ++(0,-.5) -- node[below,align=center]{Total Gear Reduction\\27:1} ($(gs3.east)+(0,-1.5)$) -- ++(0,.5);
         \draw[->]
         (m.south) -- (gs1.north);
         \draw[->]
@@ -273,13 +279,13 @@ The mechanical block diagram for the final design is shown in \autoref{fig:mbd2}
     \begin{tikzpicture}[thick,>={Stealth}]
         \draw
         (0,0) node[draw,rectangle,align=center](m){Motor\\PAN14EE12MD\\12800 rpm}
-        (0,-2) node[draw,rectangle,align=center](gs1){Gear Stage (1)\\3:1 reduction\\4267 rpm}
-        (4,-2) node[draw,rectangle,align=center](gs2){Gear Stage (2)\\3:1 reduction\\1422 rpm}
-        (4,-4) node[draw,rectangle,align=center](gs3){Gear Stage (3)\\3:1 reduction\\474 rpm}
-        (0,-4) node[draw,rectangle,align=center](gs4){Gear Stage (4)\\3:1 reduction\\158 rpm}
+        (0,-2) node[draw,rectangle,align=center](gs1){Gear Stage (1)\\3:1 Reduction\\4267 rpm}
+        (4,-2) node[draw,rectangle,align=center](gs2){Gear Stage (2)\\3:1 Reduction\\1422 rpm}
+        (4,-4) node[draw,rectangle,align=center](gs3){Gear Stage (3)\\3:1 Reduction\\474 rpm}
+        (0,-4) node[draw,rectangle,align=center](gs4){Gear Stage (4)\\3:1 Reduction\\158 rpm}
         (-4,-6) node[draw,rectangle,align=center](w){Wheel};
         \draw
-        (gs3.east) ++(0,-1) -- ++(0,-.5) -- node[below,align=center]{Total gear reduction\\81:1} ($(gs4.west)+(0,-1.5)$) -- ++(0,.5);
+        (gs3.east) ++(0,-1) -- ++(0,-.5) -- node[below,align=center]{Total Gear Reduction\\81:1} ($(gs4.west)+(0,-1.5)$) -- ++(0,.5);
         \draw[->]
         (m.south) -- (gs1.north);
         \draw[->]
@@ -313,7 +319,12 @@ The iterations through designs are most apparent when comparing the initial and 
 The primary tests used to validate mechanical performance were trials testing the ability of the vehicle to clear the ramp, where it was able to perform effectively in both designs. However, in the initial development and testing of the final design, which involved a flat chassis without the bracket, the car would clip the top lip of the ramp, as previously discussed, and thus was unable to complete the ramp. This was solved by the brackets which increased the clearance under the car and allowed the car to complete the ramp. As well, the maneuverability of the vehicle was tested by using the ultrasonic sensor and metal detection circuit to detect their respective targets, as would be done in the final obstacle course. In the initial design, the vehicle was found to be difficult to control and effectively detect the targets. The higher speed added difficulty to steering and overall maneuverability. This was remedied in the final design with the addition of a gear stage, reducing the speed once more.
 
 Something that could be improved with the vehicle is the overall size, as compared to other designs it is observed to be somewhat larger. This would better the maneuverability of the vehicle and reduce the total weight of the vehicle further. A possible solution is the usage of motors with an internal gearbox, as metal gears provide the necessary strength and precision at that scale when compared to 3D printed gears. This would reduce the size of the gearboxes and most likely the amount of gear stages, which occupy a large amount of the vehicle volume.
+
+\newpage
+
 \section{References}
+
+\newpage
 
 \section{Appendices}
 \begin{table}
@@ -323,13 +334,13 @@ Something that could be improved with the vehicle is the overall size, as compar
     \vspace{\baselineskip}
     \begin{tblr}{colspec={*6{Q[l]}}}
         \toprule
-        Item & Item description & Source & Unit price & Quantity & Cost \\
+        Item & Item Description & Source & Unit Price & Quantity & Cost \\
         \midrule
         1 & Wheels & Amazon & \$5.00 & 2 & \$10.00 \\
-        2 & Motors & Digikey & \$9.16 & 2 & \$18.32 \\
+        2 & Motors & DigiKey & \$9.16 & 2 & \$18.32 \\
         3 & ESP32 & Amazon & \$13.00 & 1 & \$13.00 \\
         4 & Battery & Amazon & \$25.99 & 1 & \$25.99 \\
-        5 & PCB parts & Digikey & \$31.80 & 1 & \$31.80 \\
+        5 & PCB parts & DigiKey & \$31.80 & 1 & \$31.80 \\
         6 & Caster wheels & Home Depot & \$4.00 & 2 & \$8.00 \\
         7 & Bolts and nuts & Home Depot & --- & --- & --- \\
         \bottomrule

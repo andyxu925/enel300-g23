@@ -1,14 +1,14 @@
-\contentsline {section}{\numberline {1}Abstract}{1}{section.1}%
-\contentsline {section}{\numberline {2}Background}{2}{section.2}%
-\contentsline {section}{\numberline {3}Detailed Design}{2}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Electrical Architecture}{2}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Metal Detector, Distance Sensing, and Motor Drive Circuits}{3}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Power Management}{4}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}Printed Circuit Board Design}{5}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}Remote Controller Design}{5}{subsection.3.5}%
-\contentsline {subsection}{\numberline {3.6}Software Architecture}{5}{subsection.3.6}%
-\contentsline {subsection}{\numberline {3.7}Software Design}{6}{subsection.3.7}%
-\contentsline {subsection}{\numberline {3.8}Mechanical Architecture}{7}{subsection.3.8}%
-\contentsline {subsection}{\numberline {3.9}Mechanical Design}{10}{subsection.3.9}%
-\contentsline {section}{\numberline {4}References}{12}{section.4}%
-\contentsline {section}{\numberline {5}Appendices}{12}{section.5}%
+\contentsline {section}{\numberline {1}Abstract}{2}{section.1}%
+\contentsline {section}{\numberline {2}Background}{3}{section.2}%
+\contentsline {section}{\numberline {3}Detailed Design}{4}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Electrical Architecture}{4}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Metal Detector, Distance Sensing, and Motor Drive Circuits}{4}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Power Management}{5}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Printed Circuit Board Design}{6}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Remote Controller Design}{6}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Software Architecture}{6}{subsection.3.6}%
+\contentsline {subsection}{\numberline {3.7}Software Design}{7}{subsection.3.7}%
+\contentsline {subsection}{\numberline {3.8}Mechanical Architecture}{8}{subsection.3.8}%
+\contentsline {subsection}{\numberline {3.9}Mechanical Design}{11}{subsection.3.9}%
+\contentsline {section}{\numberline {4}References}{14}{section.4}%
+\contentsline {section}{\numberline {5}Appendices}{15}{section.5}%
