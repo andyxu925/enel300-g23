@@ -88,7 +88,13 @@ Key challenges included improving the metal detection system, configuring the ST
 \newpage
 
 \section{Background}
+This RC car was developed using many different ideas and inspirations, but it was mainly influenced by previous projects and common designs used in robotic platforms.
 
+Firstly, the mechanical design was inspired by a previous project completed in ENGG 200. A tank steering system was selected because it is easier to implement than many other steering methods. This design made both the chassis development and the motor control logic simpler. The chassis was created using ideas from several previous designs so that it could efficiently support all required components, including the battery, motors, sensors, and PCB boards.
+
+Furthermore, another major inspiration for the project came from the Garden Project completed in ENGG 200. That group used a webserver to monitor soil moisture levels, which inspired our team to use a webserver to control the RC car instead of using a traditional handheld controller. Rather than using the STM32 to control the motors, an ESP32 was selected for this task. The specific ESP32 module was chosen because it included built-in Wi-Fi, Bluetooth capability, and an onboard antenna, which simplified wireless communication and made implementation easier.
+
+Other inspirations for the car came from the project requirements themselves. Since the ultrasonic sensor was provided and had been used in previous classes, it was the most practical option for implementing the distance sensing system. In addition, the STM32 was also provided, and since workshops were conducted to help students learn how to use it, it was the most effective option for implementing the distance sensing and metal detection circuits without interfering with the motor control code. Lastly, the metal detection circuit was inspired by online research followed by trial and error during development. Many circuit variations were tested before selecting the final design that best suited the vehicle.
 \newpage
 
 \section{Detailed Design}
