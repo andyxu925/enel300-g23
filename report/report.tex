@@ -77,7 +77,7 @@
 \newpage
 
 \section{Abstract}
-The purpose of this project was to create a radio-controlled vehicle for a competition at the end of the semester. The requirements of the vehicle were to be able to move wirelessly, detect copper plates, and measure the distance of nearby objects. The final project used skills integrated from mechanical, software, and electrical engineering concepts. 
+The purpose of this project was to create a radio-controlled vehicle for a competition at the end of the semester. The requirements of the vehicle were to be able to move wirelessly, detect copper plates, and measure the distance of nearby objects. The final project used skills integrated from mechanical, software, and electrical engineering concepts.
 
 The vehicle used both an STM32 microcontroller and an ESP32 module to create a reliable and efficient control system. Firstly, the ESP32 was controlled through a smartphone webserver interface developed in Visual Studio Code. The ESP32 was responsible for motor control and headlight operation. Then, the STM32 controlled the ultrasonic distance sensing and the metal detection functions. For steering, the vehicle used a tank steering system, where the left and right motors were controlled independently for improved maneuverability.
 
@@ -88,13 +88,6 @@ Key challenges included improving the metal detection system, configuring the ST
 \newpage
 
 \section{Background}
-This RC car was developed using many different ideas and inspirations, but it was mainly influenced by previous projects and common designs used in robotic platforms.
-
-Firstly, the mechanical design was inspired by a previous project completed in ENGG 200. A tank steering system was selected because it is easier to implement than many other steering methods. This design made both the chassis development and the motor control logic simpler. The chassis was created using ideas from several previous designs so that it could efficiently support all required components, including the battery, motors, sensors, and PCB boards.
-
-Furthermore, another major inspiration for the project came from the Garden Project completed in ENGG 200. That group used a webserver to monitor soil moisture levels, which inspired our team to use a webserver to control the RC car instead of using a traditional handheld controller. Rather than using the STM32 to control the motors, an ESP32 was selected for this task. The specific ESP32 module was chosen because it included built-in Wi-Fi, Bluetooth capability, and an onboard antenna, which simplified wireless communication and made implementation easier.
-
-Other inspirations for the car came from the project requirements themselves. Since the ultrasonic sensor was provided and had been used in previous classes, it was the most practical option for implementing the distance sensing system. In addition, the STM32 was also provided, and since workshops were conducted to help students learn how to use it, it was the most effective option for implementing the distance sensing and metal detection circuits without interfering with the motor control code. Lastly, the metal detection circuit was inspired by online research followed by trial and error during development. Many circuit variations were tested before selecting the final design that best suited the vehicle.
 
 \newpage
 
@@ -141,6 +134,8 @@ The electrical block diagram is shown in \autoref{fig:ebd}.
 \end{figure}
 
 \subsection{Metal Detector, Distance Sensing, and Motor Drive Circuits}
+Originally, for the motor driver circuit we used the L298N which was given to us in ENGG 200 as a place holder for the PCB board. We decided to place this circuit onto a PCB board to fulfill the PCB requirements for the project. For the motor driver circuit, we decided to use the circuit shown in the technical workshop as we had already built this one for the workshop. A design iteration that we did explore for this PCB board was soldering the esp32 module right onto the board, but this limited our access to the esp32 with a cable. We switched this to an esp32 devboard which slotted in with pin headers and allowed us to switch the esp32 if needed. Also, this PCB board was switched from a 2 layer to a 4-layer board to allow for better power dissipation and more room for copper pours. To validate this PCB board, we first checked to see if there were any shorts on the board, then tested the outputs on the buck convertor, then tested our motors to see if the circuit worked. Once soldered correctly, the circuit board worked on the first iteration and performed as expected in simulations. The temperatures of the motor driver's ICs were also monitored to ensure there was proper heat dissipation.
+
 For the metal detection circuit, many designs were researched before finding the one that we decided to use. The main differences between them were the type of coil used to detect metal and the circuitry used to generate the signal. The different types of coils included transmit/receive coils, coils wrapped around a ferrite core and single coils. As for the generation, the options were between a 555 timer, a transistor setup, and a CD4011 NAND gate. For our first iteration of the metal detector, we went with a 555 timer and a single coil design because all of the components were readily available in the school, and the design for the circuit was the simplest of all the options.
 
 %figure
@@ -150,10 +145,6 @@ The circuit functions by sending a signal of a certain frequency through the coi
 %figure
 
 After breadboarding and testing this new circuit worked, we made a PCB for this circuit that would also hold the STM that we could mount to the car. The final hurdle that needed to be cleared was the detection coil. Over three iterations in total, it was discovered that the denser the windings of the coil, the greater the change in frequency and therefore the greater margin for error we had when setting up the threshold frequency. This was especially important because the baseline frequency was prone to drifting up and down during testing. We also found that we would get better results the closer in diameter the coil was to the copper plates.
-
-The distance sensing component of the project is a simple connection between the STM32 MCU and the ultrasonic sensor module, using GPIO pins to trigger and read signals from the sensor.
-
-Originally, for the motor driver circuit we used the L298N which was given to us in ENGG 200 as a place holder for the PCB board. We decided to place this circuit onto a PCB board to fulfill the PCB requirements for the project. For the motor driver circuit, we decided to use the circuit shown in the technical workshop as we had already built this one for the workshop. A design iteration that we did explore for this PCB board was soldering the esp32 module right onto the board, but this limited our access to the esp32 with a cable. We switched this to an esp32 devboard which slotted in with pin headers and allowed us to switch the esp32 if needed. Also, this PCB board was switched from a 2 layer to a 4-layer board to allow for better power dissipation and more room for copper pours. To validate this PCB board, we first checked to see if there were any shorts on the board, then tested the outputs on the buck convertor, then tested our motors to see if the circuit worked. Once soldered correctly, the circuit board worked on the first iteration and performed as expected in simulations. The temperatures of the motor driver's ICs were also monitored to ensure there was proper heat dissipation.
 
 \subsection{Power Management}
 On the vehicle, there are three voltage levels which are 12V, 5V, and 3.3V. We decided to use 12V because this would allow us to use higher voltage motors, which would ensure we have enough power to make the steep climb. The 5V power rail was used to supply power to the voltage regulator on the esp32 board and power the stm32 microcontroller board. The 3V3 power rail was used to power the esp32 microcontroller and provide a high logic level to the motor driver ICs.
@@ -169,11 +160,12 @@ The functions integrated on the first printed circuit board design include a buc
 
 For thermal design considerations, I decided to use a 4-layer board to allow for a power plate that contained copper pours for 12V power, 5V power, and 3.3V power.  Two of the plates were used for signal tracing, and the final plate was used as a ground copper pour. I also decided to use copper pours by the fuse into the circuit protection as this would be where most of the current is flowing into the circuit board. To allow for power dissipation, I used 0.8mm vias and placed extra vias on the larger pads and the ground pad of the motor driver ICs. For layout decisions, I decided to place the battery protection pieces at the bottom of the board where the battery is connected. I decided to place the motor driver's ICs on the left and right side of the board and the buck converter near the middle of the board. This allowed me to keep the high heat pieces separated from each other and allow for space for each circuit. I also used thick 2mm traces for high current routes and copper pours for each of the power voltage connections.
 
-The PCB schematic and layout for the board handling the ESP32 and movement are shown in \autoref{espsch} and \autoref{esppcb}, as well as a 3D rendering in \autoref{esp3d}.
-
-The PCB designed for the STM32 MCU and the metal detection and distance sensing components is much simpler, as there are no high power components. A number of header pins are used to route the STM32 pins to their respective components, while the main metal detection circuit is contained on the board. The PCB schematic and layout for the board handling the STM32 and these components are shown in \autoref{stmsch} and \autoref{stmpcb}, as well as a 3D rendering in \autoref{stmp3d}.
-
 \subsection{Remote Controller Design}
+The remote controller was designed using a software approach through a web server rather than a physical hardware design as we wanted to reduce the cost factor of a physical controller. This not only provided us with full customizability of the controller during testing to see what design felt comfortable but also allowed us to focus more on other hardware designs for the car as the user interface was somewhat predetermined with the use of a phone. Furthermore, the user layout was created with the layout of a simple RC controller that utilizes one joystick for the throttle and another for the steering. On our web server, we include one vertical slider om the left-hand side that is purely for forward and reverse throttle, and a horizontal slider on the right-hand side for steering of the car. These sliders both had an included dead space around the center to allow for easy stoppage or straight driving of the vehicle. Additional buttons were added to the controller, specifically to toggle the LED’s and reset the sliders to their base position at zero.  
+
+Our controller utilizes the ESP32’s built in WIFI functionality as a form of communication and accesses an HTTP web server over this network. Essentially, the user will connect to the WIFI network with their phone and enter the specific ESP32 IP address into their web browser (Safari works best). Once the user provides an input, the server sends an HTTP GET request to the ESP32 which is handled in the uploaded code on the microcontroller, which responds with the action tied to that command. The data is encoded with HTTP URL query strings where certain parameters, like throttle and steering, are paired. Other interactions like the use of the LED or stop buttons immediately access the endpoint commands. When the ESP32 receives this data, the handler functions defined in the code parse the data to extract its basic parameters and convert them to the values needed for the PWM speed and direction of the motors for example. This strategy allows our controller to provide immediate feedback to the motors and LED.
+
+The remote control is tied to the motor PCB board and interacts with each of the motors through the motor drivers on the board. When the user’s input is processed, the ESP will send a voltage to the motor drivers on the board, or to the LEDs mounted on the front of the car with a simple parallel LED circuit.  
 
 \subsection{Software Architecture}
 The software block diagram for the movement systems of the design is shown in \autoref{sbdesp}.
@@ -224,6 +216,12 @@ The software block diagram for the movement systems of the design is shown in \a
     \label{sbdesp}
 \end{figure}
 \subsection{Software Design}
+Our vehicles design includes both the STM32 and the ESP32-Wroom-32E microcontrollers. Our deviation from the STM32 was made mainly for our controller design as we wanted it to be virtual and through WIFI. Additionally, the ESP32 allowed for more space on our car, and we overall felt more comfortable working with the ESP32 and its code environment. The software used with the ESP32 was through the ESP-IDF extension on Visual Studio Code (VS Code) and the main peripherals that were configured were GPIO, LEDC, WIFI, and DAC. GPIO pins were assigned as output to control the motor directions and to toggle the LED output. Input GPIO pins were defined for current sensing applications as well, although we did not use them in our final iteration. Moreover, the LEDC peripheral was used to control the speed of the motors through PWM. Our motors were configured at a frequency of 5kHz and an 8-bit resolution. Additionally, a DAC channel was used to allow for easy testing of our metal detection circuit as it could adjust the baseline frequency used to read the copper plate. This was a necessary step for testing our metal detection circuit as our original circuit design was inaccurate and allowed us to more easily determine the issues with our circuit like cold solder joints and too few copper coil turns. Lastly, WIFI was configured to provide a wireless network signal for the user’s device to access the web server and control the car. Communication between the remote control and the ESP32 was defined using WIFI and HTTP requests to the microcontroller. Through the wireless network that the ESP32 hosts itself, a web server can be accessed that receives HTTP requests from the user. These requests are handled and processed to output the desired action. 
+
+Four modular components were defined for this project: these include the main module designed specifically for initialization of the system, a motor module in charge of controlling the actions of the motors like speed through PWM and direction, a web server module responsible for the user interface of the controller as well as processing the HTTP data from the user’s inputs, and lastly a WIFI module that creates the wireless network for the user to connect to. Each of these modules had specific print functions defined for debugging and could be seen in the terminal when the ESP32 was connected to the computer. These were mainly used to check data transmission for our sliders to see the HTTP requests in real time and to access and update our controller interface. Additional debugging was done by testing each component separately, which was mainly done for the motors to adjust for speed inaccuracies caused by slight differences in the motors, gearboxes, and friction. 
+
+Our system requires the use of immediate responses when it comes to driving the car as quick actions are needed to adjust the car quickly in tiny areas to avoid crashes and properly read for distance or metal. We achieved this using our web server and HTTP GET requests through our sliders that update the outputs to the motors. For example, any time you slide the throttle slider up past the center dead zone to make the car move forward, an HTTP GET request is sent to ESP32 for every change in the sliders position. Because it is an 8-bit resolution for the PWM speed, the ESP32 can receive up to 255 requests with this one action and translate each of those requests to motor actions almost immediately. Similarly, this same process is used for the LED and stop buttons. This was important for us to use as we wanted there to be little latency between the controller and driving control and make it relatively straightforward to operate with the layout of our controller. 
+
 The key role of the STM32 was distance sensing and operating the metal detection circuit. It was used as the dedicated sensing and data-processing controller for the RC vehicle. While the microcontroller has many different pins and possible configurations, the main peripherals configured for this project were GPIO, ADC1, I2C1, USART2, TIM2, and DAC resources using STM32CubeIDE. The GPIO pins were configured as input/output pins for the ultrasonic trigger and echo signals, which are both digital sensor interfaces. In addition, GPIO pins were also used for the buzzer output and the frequency input from the metal detection circuit. Furthermore, ADC1 was configured to sample the output of the metal detection circuit so that the microcontroller could monitor signal amplitude and use this information in the detection logic. Since an LCD screen was used to display the measured distance and metal detection frequency, I2C1 was configured to allow communication between the microcontroller and the display. Lastly, USART2 was used for serial debugging, where live sensor values were frequently transmitted back to the computer during testing and development.
 
 The STM32 was programmed to generate a 10 µs trigger pulse to control the ultrasonic sensor. After receiving this pulse, the sensor emitted an ultrasonic wave and waited for the reflection from a nearby object. The program measured how long the echo signal remained high, and from that value, it calculated the distance to the object. This method worked well for the vehicle because it provided accurate measurements while the car was in motion. At the same time, the STM32 was also programmed to measure the signal frequency and ADC value from the metal detection circuit. The frequency was obtained by counting pulses over a period of time, while the ADC measured changes in signal level. Both values were used to create a threshold for detecting the presence of metal beneath the vehicle. Since the buzzer could be triggered too easily by noise or false readings, the STM32 was programmed to require several similar successful readings before turning the buzzer on. This improved reliability and reduced random false alarms. For user feedback, the LCD screen displayed the ADC value, measured frequency, and distance to nearby objects. This allowed the team to verify that the system was operating correctly. In conclusion, the STM32 was responsible for sensing and detection tasks, while the ESP32 was used for motor control and communication between the phone and the vehicle.
@@ -315,15 +313,15 @@ The mechanical block diagram for the final design is shown in \autoref{fig:mbd2}
 \end{figure}
 
 \subsection{Mechanical Design}
-The drivetrain design involves a tank steering system, where two independent motors are controlled to be able to turn and steer the vehicle by varying the speed of the wheels, that is, speeding up one wheel and slowing down the other. This design was chosen due to certain advantages compared to other options, such as using one motor to drive a differential and thus both wheels simultaneously. With tank steering and the usage of two separate motors, the mechanical complexity is lower, thus reducing the chance of failure within the mechanical system.
+The drivetrain design involves a tank steering system, where two independent motors are controlled to be able to turn and steer the vehicle by varying the speed of the wheels, that is, speeding up one wheel and slowing down the other. This design was chosen due to certain advantages compared to other options, such as using one motor to drive a differential and thus both wheels simultaneously. With tank steering and the usage of two separate motors, the mechanical complexity is lower, thus reducing the chance of failure within the mechanical system. 
 
-An 81:1 total gear reduction is implemented through 4 stages of 3:1 gear reduction to reduce the nominal rpm of the motors to 158 rpm, enabling finer control of the vehicle. Furthermore, this creates the necessary torque to climb the ramp through mechanical advantage.
+An 81:1 total gear reduction is implemented through 4 stages of 3:1 gear reduction to reduce the nominal rpm of the motors to 158 rpm, enabling finer control of the vehicle. Furthermore, this creates the necessary torque to climb the ramp through mechanical advantage. 
 
-The chassis design involves two separate frames, divided to be able to 3D print the chassis within the size of the print bed. These pieces are combined through the use of nuts and bolts. The bracket between the two frames creates the necessary clearance to clear the top lip of the ramp. The beams are intended to provide structural strength and integrity. The use of these beams compared to a solid block, as seen in the initial design (\autoref{fig:m11}), allows less material usage, faster print times, and reduced weight in the final vehicle. A number of mounting holes are placed throughout the design of the chassis to facilitate the attachment of the necessary components, such as the gearboxes, PCBs, ultrasonic sensor, and LCD display screen.
+The chassis design involves two separate frames, divided to be able to 3D print the chassis within the size of the print bed. These pieces are combined through the use of nuts and bolts. The bracket between the two frames creates the necessary clearance to clear the top lip of the ramp. The beams are intended to provide structural strength and integrity. The use of these beams compared to a solid block, as seen in the initial design (\autoref{fig:m11}), allows less material usage, faster print times, and reduced weight in the final vehicle. A number of mounting holes are placed throughout the design of the chassis to facilitate the attachment of the necessary components, such as the gearboxes, PCBs, ultrasonic sensor, and LCD display screen. 
 
-The primary material used in the implementation of the vehicle is PLA through 3D printing, including all structural components such as the chassis and gearbox housings, the mounting brackets for electric components, and the gears for the drivetrain. PLA was chosen for its ease of access, printing, and availability, as well as its generally favorable mechanical properties (rigidity).
+The primary material used in the implementation of the vehicle is PLA through 3D printing, including all structural components such as the chassis and gearbox housings, the mounting brackets for electric components, and the gears for the drivetrain. PLA was chosen for its ease of access, printing, and availability, as well as its generally favorable mechanical properties (rigidity). 
 
-Components are mounted to the chassis primarily using nuts and bolts, with custom mounting brackets for each component being designed and printed in PLA. An exception to this the attachment for the ultrasonic sensor, mounted by using a clip-style fit that is then bolted to the chassis, for simplicity and avoiding designing around the much smaller mounting holes of the sensor. The motors for both designs are held within an enclosure, constraining their movement. These mounting strategies were chosen for availability, ease of design, and more secure mountings.
+Components are mounted to the chassis primarily using nuts and bolts, with custom mounting brackets for each component being designed and printed in PLA. An exception to this the attachment for the ultrasonic sensor, mounted by using a clip-style fit that is then bolted to the chassis, for simplicity and avoiding designing around the much smaller mounting holes of the sensor. The motors for both designs are held within an enclosure, constraining their movement. These mounting strategies were chosen for availability, ease of design, and more secure mountings. 
 
 A physical challenge encountered during the design of the vehicle involves the limitation of the bed size of a 3D printer, which limits the maximum size of a printed component in one piece. Thus, as seen in the final vehicle, it was necessary to split the frame into multiple pieces to be assembled later. Another constraint was the need for an ample amount of space for mounting components, exacerbated by the large gearboxes relative to the other components. As well, the final size of the vehicle was considered throughout the design process to stay on the ramp and avoid falling off, as well as having the ability to navigate the obstacle course effectively, as a larger vehicle would be harder to control. This is alleviated by using a large gear reduction, allowing a range of rpms lower than normal, allowing finer control.
 
@@ -377,42 +375,6 @@ Something that could be improved with the vehicle is the overall size, as compar
     \includegraphics[width=\textwidth]{f3.png}
     \caption{Implementation of the final design (3)}
     \label{f3}
-\end{figure}
-
-\begin{figure}
-    \includegraphics[width=\textwidth]{espsch.pdf}
-    \caption{Schematic for the ESP PCB}
-    \label{espsch}
-\end{figure}
-
-\begin{figure}
-    \includegraphics[width=\textwidth]{esppcb.pdf}
-    \caption{Layout for the ESP PCB}
-    \label{esppcb}
-\end{figure}
-
-\begin{figure}
-    \includegraphics[width=\textwidth]{esp3d.png}
-    \caption{3D rendering of the ESP PCB}
-    \label{esp3d}
-\end{figure}
-
-\begin{figure}
-    \includegraphics[width=\textwidth]{stmsch.pdf}
-    \caption{Schematic for the STM32 PCB}
-    \label{stmsch}
-\end{figure}
-
-\begin{figure}
-    \includegraphics[width=\textwidth]{stmpcb.pdf}
-    \caption{Layout for the STM32 PCB}
-    \label{stmpcb}
-\end{figure}
-
-\begin{figure}
-    \includegraphics[width=\textwidth]{stm3d.png}
-    \caption{3D rendering of the STM32 PCB}
-    \label{stm3d}
 \end{figure}
 
 \end{document}
