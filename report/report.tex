@@ -14,7 +14,7 @@
 \floatplacement{table}{H}
 \floatplacement{figure}{H}
 \definecolor{userteal}{HTML}{47a67c}
-\usetikzlibrary{arrows.meta,calc}
+\usetikzlibrary{arrows.meta,calc,positioning}
 \UseTblrLibrary{booktabs}
 
 \renewcommand{\familydefault}{\sfdefault}
@@ -130,6 +130,16 @@ The electrical block diagram is shown in \autoref{fig:ebd}.
 \subsection{Metal Detector, Distance Sensing, and Motor Drive Circuits}
 Originally, for the motor driver circuit we used the L298N which was given to us in ENGG 200 as a place holder for the PCB board. We decided to place this circuit onto a PCB board to fulfill the PCB requirements for the project. For the motor driver circuit, we decided to use the circuit shown in the technical workshop as we had already built this one for the workshop. A design iteration that we did explore for this PCB board was soldering the esp32 module right onto the board, but this limited our access to the esp32 with a cable. We switched this to an esp32 devboard which slotted in with pin headers and allowed us to switch the esp32 if needed. Also, this PCB board was switched from a 2 layer to a 4-layer board to allow for better power dissipation and more room for copper pours. To validate this PCB board, we first checked to see if there were any shorts on the board, then tested the outputs on the buck convertor, then tested our motors to see if the circuit worked. Once soldered correctly, the circuit board worked on the first iteration and performed as expected in simulations. The temperatures of the motor driver's ICs were also monitored to ensure there was proper heat dissipation.
 
+For the metal detection circuit, many designs were researched before finding the one that we decided to use. The main differences between them were the type of coil used to detect metal and the circuitry used to generate the signal. The different types of coils included transmit/receive coils, coils wrapped around a ferrite core and single coils. As for the generation, the options were between a 555 timer, a transistor setup, and a CD4011 NAND gate. For our first iteration of the metal detector, we went with a 555 timer and a single coil design because all of the components were readily available in the school, and the design for the circuit was the simplest of all the options.
+
+%figure
+
+The circuit functions by sending a signal of a certain frequency through the coil and the speaker. When the coil is held near metal, the inductance of the coil changes, changing the frequency of the signal, causing the tone the speaker emits to shift. After breadboarding this circuit and ensuring it works, we decided to make some changes to comply with the metal detection guidelines. We swapped out the AC buzzer for a header that connected to the STM so it can read the frequency of the signal directly. The STM was then connected to a DC buzzer and would power it if the frequency of the signal was above a certain threshold frequency. This would keep the buzzer from emitting sound unless metal was detected.  To further improve this circuit in the future we could use the STM to generate a signal instead of the 555 timer to cut down on the amount of components on the circuit board.
+
+%figure
+
+After breadboarding and testing this new circuit worked, we made a PCB for this circuit that would also hold the STM that we could mount to the car. The final hurdle that needed to be cleared was the detection coil. Over three iterations in total, it was discovered that the denser the windings of the coil, the greater the change in frequency and therefore the greater margin for error we had when setting up the threshold frequency. This was especially important because the baseline frequency was prone to drifting up and down during testing. We also found that we would get better results the closer in diameter the coil was to the copper plates.
+
 \subsection{Power Management}
 On the vehicle, there are three voltage levels which are 12V, 5V, and 3.3V. We decided to use 12V because this would allow us to use higher voltage motors, which would ensure we have enough power to make the steep climb. The 5V power rail was used to supply power to the voltage regulator on the esp32 board and power the stm32 microcontroller board. The 3V3 power rail was used to power the esp32 microcontroller and provide a high logic level to the motor driver ICs.
 
@@ -147,8 +157,57 @@ For thermal design considerations, I decided to use a 4-layer board to allow for
 \subsection{Remote Controller Design}
 
 \subsection{Software Architecture}
+The software block diagram for the movement systems of the design is shown in \autoref{sbdesp}.
+\begin{figure}
+    \centering
+    \begin{tikzpicture}[
+        block/.style = {draw, rectangle, minimum height=2em, minimum width=3em, align=center},
+        arrow/.style = {->, thick,>={Stealth}},
+        thick
+    ]
 
+    \node[block] (remote) {User device/browser};
+
+    \node[block, below=of remote] (wifi) {WiFi};
+
+    \node[block, below=of wifi] (webserver) {HTTP web server};
+
+    \node[block, below=of webserver] (handler) {Request handler};
+
+    \node[block, below=of handler] (logic) {Control logic};
+
+    \node[block, below left=of logic] (motor) {Motor control \\ (Throttle/steering)};
+
+    \node[block, below=of logic] (dac) {DAC output};
+
+    \node[block, below right=of logic] (LED) {LED control};
+
+    \node[block, below=of motor] (pwm) {LEDC PWM};
+
+    \draw[arrow] (remote) -- (wifi);
+
+    \draw[arrow] (wifi) -- (webserver);
+
+    \draw[arrow] (webserver) -- (handler);
+
+    \draw[arrow] (handler) -- (logic);
+
+    \draw[arrow] (logic) -- (motor);
+
+    \draw[arrow] (logic) -- (dac);
+
+    \draw[arrow] (logic) -- (LED);
+
+    \draw[arrow] (motor) -- (pwm);
+
+    \end{tikzpicture}
+    \caption{Software block diagram for the movement of the design}
+    \label{sbdesp}
+\end{figure}
 \subsection{Software Design}
+The key role of the STM32 was distance sensing and operating the metal detection circuit. It was used as the dedicated sensing and data-processing controller for the RC vehicle. While the microcontroller has many different pins and possible configurations, the main peripherals configured for this project were GPIO, ADC1, I2C1, USART2, TIM2, and DAC resources using STM32CubeIDE. The GPIO pins were configured as input/output pins for the ultrasonic trigger and echo signals, which are both digital sensor interfaces. In addition, GPIO pins were also used for the buzzer output and the frequency input from the metal detection circuit. Furthermore, ADC1 was configured to sample the output of the metal detection circuit so that the microcontroller could monitor signal amplitude and use this information in the detection logic. Since an LCD screen was used to display the measured distance and metal detection frequency, I2C1 was configured to allow communication between the microcontroller and the display. Lastly, USART2 was used for serial debugging, where live sensor values were frequently transmitted back to the computer during testing and development.
+
+The STM32 was programmed to generate a 10 µs trigger pulse to control the ultrasonic sensor. After receiving this pulse, the sensor emitted an ultrasonic wave and waited for the reflection from a nearby object. The program measured how long the echo signal remained high, and from that value, it calculated the distance to the object. This method worked well for the vehicle because it provided accurate measurements while the car was in motion. At the same time, the STM32 was also programmed to measure the signal frequency and ADC value from the metal detection circuit. The frequency was obtained by counting pulses over a period of time, while the ADC measured changes in signal level. Both values were used to create a threshold for detecting the presence of metal beneath the vehicle. Since the buzzer could be triggered too easily by noise or false readings, the STM32 was programmed to require several similar successful readings before turning the buzzer on. This improved reliability and reduced random false alarms. For user feedback, the LCD screen displayed the ADC value, measured frequency, and distance to nearby objects. This allowed the team to verify that the system was operating correctly. In conclusion, the STM32 was responsible for sensing and detection tasks, while the ESP32 was used for motor control and communication between the phone and the vehicle.
 
 \subsection{Mechanical Architecture}
 Two distinct mechanical designs will be discussed. The first design (see \autoref{fig:m11} and \autoref{fig:m12}) was the initial concept implemented, later redesigned to the second design shown (see \autoref{fig:m21} and \autoref{fig:m22}) in response to certain challenges related to the mechanical system observed throughout the development of the project. For the following diagrams, the housing for the gearbox on one side is omitted to show the gear reduction used in each design.
@@ -237,32 +296,32 @@ The mechanical block diagram for the final design is shown in \autoref{fig:mbd2}
 \end{figure}
 
 \subsection{Mechanical Design}
-The drivetrain design involves a tank steering system, where two independent motors are controlled to be able to turn and steer the vehicle by varying the speed of the wheels, that is, speeding up one wheel and slowing down the other. This design was chosen due to certain advantages compared to other options, such as using one motor to drive a differential and thus both wheels simultaneously. With tank steering and the usage of two separate motors, the mechanical complexity is lower, thus reducing the chance of failure within the mechanical system.
+The drivetrain design involves a tank steering system, where two independent motors are controlled to be able to turn and steer the vehicle by varying the speed of the wheels, that is, speeding up one wheel and slowing down the other. This design was chosen due to certain advantages compared to other options, such as using one motor to drive a differential and thus both wheels simultaneously. With tank steering and the usage of two separate motors, the mechanical complexity is lower, thus reducing the chance of failure within the mechanical system. 
 
-An 81:1 total gear reduction is implemented through 4 stages of 3:1 gear reduction to reduce the nominal rpm of the motors to 158 rpm, enabling finer control of the vehicle. Furthermore, this creates the necessary torque to climb the ramp through mechanical advantage.
+An 81:1 total gear reduction is implemented through 4 stages of 3:1 gear reduction to reduce the nominal rpm of the motors to 158 rpm, enabling finer control of the vehicle. Furthermore, this creates the necessary torque to climb the ramp through mechanical advantage. 
 
-The chassis design involves two separate frames, divided to be able to 3D print the chassis within the size of the print bed. These pieces are combined through the use of nuts and bolts. The bracket between the two frames creates the necessary clearance to clear the top lip of the ramp. The beams are intended to provide structural strength and integrity. The use of these beams compared to a solid block, as seen in the initial design (\autoref{fig:m11}), allows less material usage, faster print times, and reduced weight in the final vehicle. A number of mounting holes are placed throughout the design of the chassis to facilitate the attachment of the necessary components, such as the gearboxes, PCBs, ultrasonic sensor, and LCD display screen.
+The chassis design involves two separate frames, divided to be able to 3D print the chassis within the size of the print bed. These pieces are combined through the use of nuts and bolts. The bracket between the two frames creates the necessary clearance to clear the top lip of the ramp. The beams are intended to provide structural strength and integrity. The use of these beams compared to a solid block, as seen in the initial design (\autoref{fig:m11}), allows less material usage, faster print times, and reduced weight in the final vehicle. A number of mounting holes are placed throughout the design of the chassis to facilitate the attachment of the necessary components, such as the gearboxes, PCBs, ultrasonic sensor, and LCD display screen. 
 
-The primary material used in the implementation of the vehicle is PLA through 3D printing, including all structural components such as the chassis and gearbox housings, the mounting brackets for electric components, and the gears for the drivetrain. PLA was chosen for its ease of access, printing, and availability, as well as its generally favorable mechanical properties (rigidity).
+The primary material used in the implementation of the vehicle is PLA through 3D printing, including all structural components such as the chassis and gearbox housings, the mounting brackets for electric components, and the gears for the drivetrain. PLA was chosen for its ease of access, printing, and availability, as well as its generally favorable mechanical properties (rigidity). 
 
-Components are mounted to the chassis primarily using nuts and bolts, with custom mounting brackets for each component being designed and printed in PLA. An exception to this the attachment for the ultrasonic sensor, mounted by using a clip-style fit that is then bolted to the chassis, for simplicity and avoiding designing around the much smaller mounting holes of the sensor. The motors for both designs are held within an enclosure, constraining their movement. These mounting strategies were chosen for availability, ease of design, and more secure mountings.
+Components are mounted to the chassis primarily using nuts and bolts, with custom mounting brackets for each component being designed and printed in PLA. An exception to this the attachment for the ultrasonic sensor, mounted by using a clip-style fit that is then bolted to the chassis, for simplicity and avoiding designing around the much smaller mounting holes of the sensor. The motors for both designs are held within an enclosure, constraining their movement. These mounting strategies were chosen for availability, ease of design, and more secure mountings. 
 
 A physical challenge encountered during the design of the vehicle involves the limitation of the bed size of a 3D printer, which limits the maximum size of a printed component in one piece. Thus, as seen in the final vehicle, it was necessary to split the frame into multiple pieces to be assembled later. Another constraint was the need for an ample amount of space for mounting components, exacerbated by the large gearboxes relative to the other components. As well, the final size of the vehicle was considered throughout the design process to stay on the ramp and avoid falling off, as well as having the ability to navigate the obstacle course effectively, as a larger vehicle would be harder to control. This is alleviated by using a large gear reduction, allowing a range of rpms lower than normal, allowing finer control.
 
-The iterations through designs are most apparent when comparing the initial and final designs. A key revision is the addition of a 3:1 gear reduction stage to the gearbox, reducing the rpm of the wheels from 474 rpm to 158 rpm. This enables finer control and movement of the vehicle, albeit slower though this is largely a desirable result. Furthermore, this reduction in speed and increase in torque ensures the ability to clear the ramp and reduce the amount the motors stall. The gearboxes were also redesigned to accommodate the change in drivetrain and addition of another gear stage, and the motor was moved to be within the gearbox as well. Another key change from the initial to the final design is the redesign of the chassis, where it was split into two pieces, larger in total size than the original chassis. This created more space for the mounting of components and the ability to attach the larger gearbox. As well, the final chassis is changed from a solid block with mounting holes to a frame-like structure, keeping approximately the same mass and material usage while creating a larger total area. A notable change is the relocation of the ultrasonic sensor from the side of the vehicle to the center axis, as in testing it was notably difficult to aim the sensor at a target when it is mounted to the side. The center of mass is also moved towards the center of the vehicle, as in the initial design the battery was mounted at the very end of the vehicle behind the wheels, while the final design has the battery above and slightly forward from the wheels. This creates a better weight distribution that still keeps a majority of the weight on the wheels, enabling better traction and control. A more minor revision is the addition of a second caster wheel, reducing the amount of roll the vehicle experiences, albeit this was unlikely to drastically affect the performance of the vehicle.
+The iterations through designs are most apparent when comparing the initial and final designs. A key revision is the addition of a 3:1 gear reduction stage to the gearbox, reducing the rpm of the wheels from 474 rpm to 158 rpm. This enables finer control and movement of the vehicle, albeit slower though this is largely a desirable result. Furthermore, this reduction in speed and increase in torque ensures the ability to clear the ramp and reduce the amount the motors stall. The gearboxes were also redesigned to accommodate the change in drivetrain and addition of another gear stage, and the motor was moved to be within the gearbox as well. Another key change from the initial to the final design is the redesign of the chassis, where it was split into two pieces, larger in total size than the original chassis. This created more space for the mounting of components and the ability to attach the larger gearbox. As well, the final chassis is changed from a solid block with mounting holes to a frame-like structure, keeping approximately the same mass and material usage while creating a larger total area. A notable change is the relocation of the ultrasonic sensor from the side of the vehicle to the center axis, as in testing it was notably difficult to aim the sensor at a target when it is mounted to the side. The center of mass is also moved towards the center of the vehicle, as in the initial design the battery was mounted at the very end of the vehicle behind the wheels, while the final design has the battery above and slightly forward from the wheels. This creates a better weight distribution that still keeps a majority of the weight on the wheels, enabling better traction and control. A more minor revision is the addition of a second caster wheel, reducing the amount of roll the vehicle experiences, albeit this was unlikely to drastically affect the performance of the vehicle. The implementation of the final design in shown in \autoref{f1}, \autoref{f2}, and \autoref{f3}.
 
 The primary tests used to validate mechanical performance were trials testing the ability of the vehicle to clear the ramp, where it was able to perform effectively in both designs. However, in the initial development and testing of the final design, which involved a flat chassis without the bracket, the car would clip the top lip of the ramp, as previously discussed, and thus was unable to complete the ramp. This was solved by the brackets which increased the clearance under the car and allowed the car to complete the ramp. As well, the maneuverability of the vehicle was tested by using the ultrasonic sensor and metal detection circuit to detect their respective targets, as would be done in the final obstacle course. In the initial design, the vehicle was found to be difficult to control and effectively detect the targets. The higher speed added difficulty to steering and overall maneuverability. This was remedied in the final design with the addition of a gear stage, reducing the speed once more.
 
-Something that could be improved with the vehicle is the overall size, as compared to other designs observed it somewhat larger. This would better the maneuverability of the vehicle and reduce the total weight of the vehicle further. A possible solution is the usage of motors with an internal gearbox, as metal gears provide the necessary strength and precision at that scale when compared to 3D printed gears. This would reduce the size of the gearboxes and most likely the amount of gear stages, which occupy a large amount of the vehicle volume.
-
+Something that could be improved with the vehicle is the overall size, as compared to other designs it is observed to be somewhat larger. This would better the maneuverability of the vehicle and reduce the total weight of the vehicle further. A possible solution is the usage of motors with an internal gearbox, as metal gears provide the necessary strength and precision at that scale when compared to 3D printed gears. This would reduce the size of the gearboxes and most likely the amount of gear stages, which occupy a large amount of the vehicle volume.
 \section{References}
 
 \section{Appendices}
 \begin{table}
+    \centering
     \caption{Bill of materials}
     \label{bom}
     \vspace{\baselineskip}
-    \begin{tblr}{colspec={*5{X[l]}}}
+    \begin{tblr}{colspec={*6{Q[l]}}}
         \toprule
         Item & Item description & Source & Unit price & Quantity & Cost \\
         \midrule
@@ -277,4 +336,23 @@ Something that could be improved with the vehicle is the overall size, as compar
         &&&& Total & \$107.11
     \end{tblr}
 \end{table}
+
+\begin{figure}
+    \includegraphics[width=\textwidth]{f1.png}
+    \caption{Implementation of the final design (1)}
+    \label{f1}
+\end{figure}
+
+\begin{figure}
+    \includegraphics[width=\textwidth]{f2.png}
+    \caption{Implementation of the final design (2)}
+    \label{f2}
+\end{figure}
+
+\begin{figure}
+    \includegraphics[width=\textwidth]{f3.png}
+    \caption{Implementation of the final design (3)}
+    \label{f3}
+\end{figure}
+
 \end{document}
