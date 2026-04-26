@@ -169,6 +169,10 @@ The functions integrated on the first printed circuit board design include a buc
 
 For thermal design considerations, I decided to use a 4-layer board to allow for a power plate that contained copper pours for 12V power, 5V power, and 3.3V power.  Two of the plates were used for signal tracing, and the final plate was used as a ground copper pour. I also decided to use copper pours by the fuse into the circuit protection as this would be where most of the current is flowing into the circuit board. To allow for power dissipation, I used 0.8mm vias and placed extra vias on the larger pads and the ground pad of the motor driver ICs. For layout decisions, I decided to place the battery protection pieces at the bottom of the board where the battery is connected. I decided to place the motor driver's ICs on the left and right side of the board and the buck converter near the middle of the board. This allowed me to keep the high heat pieces separated from each other and allow for space for each circuit. I also used thick 2mm traces for high current routes and copper pours for each of the power voltage connections.
 
+The PCB schematic and layout for the board handling the ESP32 and movement are shown in \autoref{espsch} and \autoref{esppcb}, as well as a 3D rendering in \autoref{esp3d}.
+
+The PCB designed for the STM32 MCU and the metal detection and distance sensing components is much simpler, as there are no high power components. A number of header pins are used to route the STM32 pins to their respective components, while the main metal detection circuit is contained on the board. The PCB schematic and layout for the board handling the STM32 and these components are shown in \autoref{stmsch} and \autoref{stmpcb}, as well as a 3D rendering in \autoref{stmp3d}.
+
 \subsection{Remote Controller Design}
 
 \subsection{Software Architecture}
@@ -373,6 +377,42 @@ Something that could be improved with the vehicle is the overall size, as compar
     \includegraphics[width=\textwidth]{f3.png}
     \caption{Implementation of the final design (3)}
     \label{f3}
+\end{figure}
+
+\begin{figure}
+    \includegraphics[width=\textwidth]{espsch.pdf}
+    \caption{Schematic for the ESP PCB}
+    \label{espsch}
+\end{figure}
+
+\begin{figure}
+    \includegraphics[width=\textwidth]{esppcb.pdf}
+    \caption{Layout for the ESP PCB}
+    \label{esppcb}
+\end{figure}
+
+\begin{figure}
+    \includegraphics[width=\textwidth]{esp3d.png}
+    \caption{3D rendering of the ESP PCB}
+    \label{esp3d}
+\end{figure}
+
+\begin{figure}
+    \includegraphics[width=\textwidth]{stmsch.pdf}
+    \caption{Schematic for the STM32 PCB}
+    \label{stmsch}
+\end{figure}
+
+\begin{figure}
+    \includegraphics[width=\textwidth]{stmpcb.pdf}
+    \caption{Layout for the STM32 PCB}
+    \label{stmpcb}
+\end{figure}
+
+\begin{figure}
+    \includegraphics[width=\textwidth]{stm3d.png}
+    \caption{3D rendering of the STM32 PCB}
+    \label{stm3d}
 \end{figure}
 
 \end{document}
