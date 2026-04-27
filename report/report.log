@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.10.9)  26 APR 2026 19:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.10.9)  26 APR 2026 19:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -816,134 +816,151 @@ l.77 \newpage
 [2]
 
 [3]
+<mdc.png, id=142, 371.88937pt x 200.24812pt>
+File: mdc.png Graphic file (type png)
+<use mdc.png>
+Package pdftex.def Info: mdc.png  used on input line 148.
+(pdftex.def)             Requested size: 469.75502pt x 252.95258pt.
+
 
 [4]
 
-[5]
+LaTeX Warning: Reference `mdc2' on page 5 undefined on input line 153.
 
-LaTeX Warning: Reference `stmp3d' on page 6 undefined on input line 174.
+<mdc2.png, id=148, 469.755pt x 249.18094pt>
+File: mdc2.png Graphic file (type png)
+<use mdc2.png>
+Package pdftex.def Info: mdc2.png  used on input line 157.
+(pdftex.def)             Requested size: 469.75502pt x 249.18031pt.
 
 
+[5 <./mdc.png>]
 
-[6]
+[6 <./mdc2.png>]
+
+LaTeX Warning: Reference `stmp3d' on page 7 undefined on input line 184.
+
+
 
 [7]
 
 [8]
+
+[9]
 LaTeX Font Info:    Trying to load font information for TS1+qhv on input line 2
-40.
+50.
  (c:/texlive/2025/texmf-dist/tex/latex/tex-gyre/ts1qhv.fd
 File: ts1qhv.fd 2009/09/25 v1.2 font definition file for TS1/qhv
 )
 
-[9{c:/texlive/2025/texmf-dist/fonts/enc/dvips/tex-gyre/q-ts1.enc}]
-<m11.png, id=176, 1927.2pt x 1084.05pt>
+[10{c:/texlive/2025/texmf-dist/fonts/enc/dvips/tex-gyre/q-ts1.enc}]
+<m11.png, id=188, 1927.2pt x 1084.05pt>
 File: m11.png Graphic file (type png)
 <use m11.png>
-Package pdftex.def Info: m11.png  used on input line 247.
+Package pdftex.def Info: m11.png  used on input line 257.
 (pdftex.def)             Requested size: 469.75502pt x 264.22992pt.
-<m12.png, id=178, 1927.2pt x 1084.05pt>
+<m12.png, id=189, 1927.2pt x 1084.05pt>
 File: m12.png Graphic file (type png)
 <use m12.png>
-Package pdftex.def Info: m12.png  used on input line 254.
+Package pdftex.def Info: m12.png  used on input line 264.
 (pdftex.def)             Requested size: 469.75502pt x 264.22992pt.
 
 
-[10 <./m11.png>]
-<m21.png, id=184, 1927.2pt x 1084.05pt>
+[11 <./m11.png>]
+<m21.png, id=195, 1927.2pt x 1084.05pt>
 File: m21.png Graphic file (type png)
 <use m21.png>
-Package pdftex.def Info: m21.png  used on input line 261.
+Package pdftex.def Info: m21.png  used on input line 271.
 (pdftex.def)             Requested size: 469.75502pt x 264.22992pt.
-<m22.png, id=185, 1927.2pt x 1084.05pt>
+<m22.png, id=196, 1927.2pt x 1084.05pt>
 File: m22.png Graphic file (type png)
 <use m22.png>
-Package pdftex.def Info: m22.png  used on input line 268.
+Package pdftex.def Info: m22.png  used on input line 278.
 (pdftex.def)             Requested size: 469.75502pt x 264.22992pt.
 
 
-[11 <./m12.png> <./m21.png>]
+[12 <./m12.png> <./m21.png>]
 
-[12 <./m22.png>]
-
-[13]
+[13 <./m22.png>]
 
 [14]
 
 [15]
 
 [16]
-<f1.png, id=220, 469.755pt x 352.31625pt>
+
+[17]
+<f1.png, id=231, 469.755pt x 352.31625pt>
 File: f1.png Graphic file (type png)
 <use f1.png>
-Package pdftex.def Info: f1.png  used on input line 376.
+Package pdftex.def Info: f1.png  used on input line 386.
 (pdftex.def)             Requested size: 469.75502pt x 352.31538pt.
-<f2.png, id=221, 469.755pt x 352.31625pt>
+<f2.png, id=232, 469.755pt x 352.31625pt>
 File: f2.png Graphic file (type png)
 <use f2.png>
-Package pdftex.def Info: f2.png  used on input line 382.
+Package pdftex.def Info: f2.png  used on input line 392.
 (pdftex.def)             Requested size: 469.75502pt x 352.31538pt.
 
 
-[17 <./f1.png>]
-<f3.png, id=227, 469.755pt x 352.31625pt>
+[18 <./f1.png>]
+<f3.png, id=239, 469.755pt x 352.31625pt>
 File: f3.png Graphic file (type png)
 <use f3.png>
-Package pdftex.def Info: f3.png  used on input line 388.
+Package pdftex.def Info: f3.png  used on input line 398.
 (pdftex.def)             Requested size: 469.75502pt x 352.31538pt.
 
 
-[18 <./f2.png>]
-<espsch.pdf, id=234, 845.0531pt x 597.52838pt>
+[19 <./f2.png>]
+<espsch.pdf, id=245, 845.0531pt x 597.52838pt>
 File: espsch.pdf Graphic file (type pdf)
 <use espsch.pdf>
-Package pdftex.def Info: espsch.pdf  used on input line 394.
+Package pdftex.def Info: espsch.pdf  used on input line 404.
 (pdftex.def)             Requested size: 469.75502pt x 332.161pt.
 
 
-[19 <./f3.png>]
-<esppcb.pdf, id=240, 269.005pt x 207.77625pt>
+[20 <./f3.png>]
+<esppcb.pdf, id=251, 269.005pt x 207.77625pt>
 File: esppcb.pdf Graphic file (type pdf)
 <use esppcb.pdf>
-Package pdftex.def Info: esppcb.pdf  used on input line 400.
+Package pdftex.def Info: esppcb.pdf  used on input line 410.
 (pdftex.def)             Requested size: 469.75502pt x 362.8371pt.
 
 
-[20 <./espsch.pdf>]
-<esp3d.png, id=250, 374.14781pt x 249.18094pt>
+[21 <./espsch.pdf>]
+<esp3d.png, id=261, 374.14781pt x 249.18094pt>
 File: esp3d.png Graphic file (type png)
 <use esp3d.png>
-Package pdftex.def Info: esp3d.png  used on input line 406.
+Package pdftex.def Info: esp3d.png  used on input line 416.
 (pdftex.def)             Requested size: 469.75502pt x 312.87079pt.
 
 
-[21 <./esppcb.pdf>]
-<stmsch.pdf, id=257, 845.0531pt x 597.52838pt>
+[22 <./esppcb.pdf>]
+<stmsch.pdf, id=268, 845.0531pt x 597.52838pt>
 File: stmsch.pdf Graphic file (type pdf)
 <use stmsch.pdf>
-Package pdftex.def Info: stmsch.pdf  used on input line 412.
+Package pdftex.def Info: stmsch.pdf  used on input line 422.
 (pdftex.def)             Requested size: 469.75502pt x 332.161pt.
 
 
-[22 <./esp3d.png>]
-<stmpcb.pdf, id=263, 313.17pt x 233.87375pt>
+[23 <./esp3d.png>]
+<stmpcb.pdf, id=274, 313.17pt x 233.87375pt>
 File: stmpcb.pdf Graphic file (type pdf)
 <use stmpcb.pdf>
-Package pdftex.def Info: stmpcb.pdf  used on input line 418.
+Package pdftex.def Info: stmpcb.pdf  used on input line 428.
 (pdftex.def)             Requested size: 469.75502pt x 350.82399pt.
 
 
-[23 <./stmsch.pdf>]
-<stm3d.png, id=273, 1729.46124pt x 895.345pt>
+[24 <./stmsch.pdf>]
+<stm3d.png, id=286, 1729.46124pt x 895.345pt>
 File: stm3d.png Graphic file (type png)
 <use stm3d.png>
-Package pdftex.def Info: stm3d.png  used on input line 424.
+Package pdftex.def Info: stm3d.png  used on input line 434.
 (pdftex.def)             Requested size: 469.75502pt x 243.19453pt.
 
 
-[24 <./stmpcb.pdf>]
+[25 <./stmpcb.pdf>]
 
-[25 <./stm3d.png>] (./report.aux)
+[26 <./stm3d.png>] (./report.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
@@ -955,29 +972,23 @@ LaTeX Warning: There were undefined references.
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
-
-Package rerunfilecheck Warning: File `report.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `report.out':
-(rerunfilecheck)             Before: 06CD845ABA5446ABC46B3C0A1DBBCE67;2194
-(rerunfilecheck)             After:  48F0A950847ECFA46AB1F91D49066637;2180.
+Package rerunfilecheck Info: File `report.out' has not changed.
+(rerunfilecheck)             Checksum: 48F0A950847ECFA46AB1F91D49066637;2180.
  ) 
 Here is how much of TeX's memory you used:
- 23769 strings out of 467747
- 467202 string characters out of 5431117
- 863069 words of memory out of 5000000
- 52064 multiletter control sequences out of 15000+600000
+ 23789 strings out of 467747
+ 467447 string characters out of 5431117
+ 863123 words of memory out of 5000000
+ 52081 multiletter control sequences out of 15000+600000
  658206 words of font info for 62 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,9n,132p,2037b,1107s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2025/texmf-dist/fonts/type1/public/tex-gyre/qhvb.pfb><c:/texlive/
 2025/texmf-dist/fonts/type1/public/tex-gyre/qhvr.pfb>
-Output written on report.pdf (26 pages, 2506872 bytes).
+Output written on report.pdf (27 pages, 2538539 bytes).
 PDF statistics:
- 318 PDF objects out of 1000 (max. 8388607)
- 258 compressed objects within 3 object streams
- 61 named destinations out of 1000 (max. 500000)
- 195 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 330 PDF objects out of 1000 (max. 8388607)
+ 265 compressed objects within 3 object streams
+ 64 named destinations out of 1000 (max. 500000)
+ 205 words of extra memory for PDF output out of 10000 (max. 10000000)
 

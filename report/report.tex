@@ -141,13 +141,23 @@ The electrical block diagram is shown in \autoref{fig:ebd}.
 \end{figure}
 
 \subsection{Metal Detector, Distance Sensing, and Motor Drive Circuits}
-For the metal detection circuit, many designs were researched before finding the one that we decided to use. The main differences between them were the type of coil used to detect metal and the circuitry used to generate the signal. The different types of coils included transmit/receive coils, coils wrapped around a ferrite core and single coils. As for the generation, the options were between a 555 timer, a transistor setup, and a CD4011 NAND gate. For our first iteration of the metal detector, we went with a 555 timer and a single coil design because all of the components were readily available in the school, and the design for the circuit was the simplest of all the options.
+For the metal detection circuit, many designs were researched before finding the one that we decided to use. The main differences between them were the type of coil used to detect metal and the circuitry used to generate the signal. The different types of coils included transmit/receive coils, coils wrapped around a ferrite core and single coils. As for the generation, the options were between a 555 timer, a transistor setup, and a CD4011 NAND gate. For our first iteration of the metal detector, we went with a 555 timer and a single coil design because all of the components were readily available in the school, and the design for the circuit was the simplest of all the options. The metal detection circuit obtained from \textbf{REFERENCEEEEEEEEEEEEEEEE} is shown in \autoref{mdc1}.
 
-%figure
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{mdc.png}
+    \caption{The metal detection circuit}
+    \label{mdc1}
+\end{figure}
 
-The circuit functions by sending a signal of a certain frequency through the coil and the speaker. When the coil is held near metal, the inductance of the coil changes, changing the frequency of the signal, causing the tone the speaker emits to shift. After breadboarding this circuit and ensuring it works, we decided to make some changes to comply with the metal detection guidelines. We swapped out the AC buzzer for a header that connected to the STM so it can read the frequency of the signal directly. The STM was then connected to a DC buzzer and would power it if the frequency of the signal was above a certain threshold frequency. This would keep the buzzer from emitting sound unless metal was detected.  To further improve this circuit in the future we could use the STM to generate a signal instead of the 555 timer to cut down on the amount of components on the circuit board.
+The circuit functions by sending a signal of a certain frequency through the coil and the speaker. When the coil is held near metal, the inductance of the coil changes, changing the frequency of the signal, causing the tone the speaker emits to shift. After breadboarding this circuit and ensuring it works, we decided to make some changes to comply with the metal detection guidelines. We swapped out the AC buzzer for a header that connected to the STM so it can read the frequency of the signal directly. The STM was then connected to a DC buzzer and would power it if the frequency of the signal was above a certain threshold frequency. This would keep the buzzer from emitting sound unless metal was detected.  To further improve this circuit in the future we could use the STM to generate a signal instead of the 555 timer to cut down on the amount of components on the circuit board. The implementation of the metal detection circuit in the PCB schematic is shown in \autoref{mdc2}.
 
-%figure
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{mdc2.png}
+    \caption{The PCB schematic for the metal detection circuit}
+    \label{mdc12}
+\end{figure}
 
 After breadboarding and testing this new circuit worked, we made a PCB for this circuit that would also hold the STM that we could mount to the car. The final hurdle that needed to be cleared was the detection coil. Over three iterations in total, it was discovered that the denser the windings of the coil, the greater the change in frequency and therefore the greater margin for error we had when setting up the threshold frequency. This was especially important because the baseline frequency was prone to drifting up and down during testing. We also found that we would get better results the closer in diameter the coil was to the copper plates.
 
