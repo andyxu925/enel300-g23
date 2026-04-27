@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.10.9)  26 APR 2026 19:33
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.10.9)  26 APR 2026 19:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -816,7 +816,7 @@ l.77 \newpage
 [2]
 
 [3]
-<mdc.png, id=142, 371.88937pt x 200.24812pt>
+<mdc.png, id=144, 371.88937pt x 200.24812pt>
 File: mdc.png Graphic file (type png)
 <use mdc.png>
 Package pdftex.def Info: mdc.png  used on input line 148.
@@ -824,10 +824,7 @@ Package pdftex.def Info: mdc.png  used on input line 148.
 
 
 [4]
-
-LaTeX Warning: Reference `mdc2' on page 5 undefined on input line 153.
-
-<mdc2.png, id=148, 469.755pt x 249.18094pt>
+<mdc2.png, id=151, 469.755pt x 249.18094pt>
 File: mdc2.png Graphic file (type png)
 <use mdc2.png>
 Package pdftex.def Info: mdc2.png  used on input line 157.
@@ -837,10 +834,6 @@ Package pdftex.def Info: mdc2.png  used on input line 157.
 [5 <./mdc.png>]
 
 [6 <./mdc2.png>]
-
-LaTeX Warning: Reference `stmp3d' on page 7 undefined on input line 184.
-
-
 
 [7]
 
@@ -854,12 +847,12 @@ File: ts1qhv.fd 2009/09/25 v1.2 font definition file for TS1/qhv
 )
 
 [10{c:/texlive/2025/texmf-dist/fonts/enc/dvips/tex-gyre/q-ts1.enc}]
-<m11.png, id=188, 1927.2pt x 1084.05pt>
+<m11.png, id=192, 1927.2pt x 1084.05pt>
 File: m11.png Graphic file (type png)
 <use m11.png>
 Package pdftex.def Info: m11.png  used on input line 257.
 (pdftex.def)             Requested size: 469.75502pt x 264.22992pt.
-<m12.png, id=189, 1927.2pt x 1084.05pt>
+<m12.png, id=193, 1927.2pt x 1084.05pt>
 File: m12.png Graphic file (type png)
 <use m12.png>
 Package pdftex.def Info: m12.png  used on input line 264.
@@ -867,12 +860,12 @@ Package pdftex.def Info: m12.png  used on input line 264.
 
 
 [11 <./m11.png>]
-<m21.png, id=195, 1927.2pt x 1084.05pt>
+<m21.png, id=199, 1927.2pt x 1084.05pt>
 File: m21.png Graphic file (type png)
 <use m21.png>
 Package pdftex.def Info: m21.png  used on input line 271.
 (pdftex.def)             Requested size: 469.75502pt x 264.22992pt.
-<m22.png, id=196, 1927.2pt x 1084.05pt>
+<m22.png, id=200, 1927.2pt x 1084.05pt>
 File: m22.png Graphic file (type png)
 <use m22.png>
 Package pdftex.def Info: m22.png  used on input line 278.
@@ -890,12 +883,12 @@ Package pdftex.def Info: m22.png  used on input line 278.
 [16]
 
 [17]
-<f1.png, id=231, 469.755pt x 352.31625pt>
+<f1.png, id=235, 469.755pt x 352.31625pt>
 File: f1.png Graphic file (type png)
 <use f1.png>
 Package pdftex.def Info: f1.png  used on input line 386.
 (pdftex.def)             Requested size: 469.75502pt x 352.31538pt.
-<f2.png, id=232, 469.755pt x 352.31625pt>
+<f2.png, id=236, 469.755pt x 352.31625pt>
 File: f2.png Graphic file (type png)
 <use f2.png>
 Package pdftex.def Info: f2.png  used on input line 392.
@@ -903,7 +896,7 @@ Package pdftex.def Info: f2.png  used on input line 392.
 
 
 [18 <./f1.png>]
-<f3.png, id=239, 469.755pt x 352.31625pt>
+<f3.png, id=243, 469.755pt x 352.31625pt>
 File: f3.png Graphic file (type png)
 <use f3.png>
 Package pdftex.def Info: f3.png  used on input line 398.
@@ -911,7 +904,7 @@ Package pdftex.def Info: f3.png  used on input line 398.
 
 
 [19 <./f2.png>]
-<espsch.pdf, id=245, 845.0531pt x 597.52838pt>
+<espsch.pdf, id=249, 845.0531pt x 597.52838pt>
 File: espsch.pdf Graphic file (type pdf)
 <use espsch.pdf>
 Package pdftex.def Info: espsch.pdf  used on input line 404.
@@ -919,7 +912,7 @@ Package pdftex.def Info: espsch.pdf  used on input line 404.
 
 
 [20 <./f3.png>]
-<esppcb.pdf, id=251, 269.005pt x 207.77625pt>
+<esppcb.pdf, id=255, 269.005pt x 207.77625pt>
 File: esppcb.pdf Graphic file (type pdf)
 <use esppcb.pdf>
 Package pdftex.def Info: esppcb.pdf  used on input line 410.
@@ -927,7 +920,7 @@ Package pdftex.def Info: esppcb.pdf  used on input line 410.
 
 
 [21 <./espsch.pdf>]
-<esp3d.png, id=261, 374.14781pt x 249.18094pt>
+<esp3d.png, id=265, 374.14781pt x 249.18094pt>
 File: esp3d.png Graphic file (type png)
 <use esp3d.png>
 Package pdftex.def Info: esp3d.png  used on input line 416.
@@ -935,7 +928,7 @@ Package pdftex.def Info: esp3d.png  used on input line 416.
 
 
 [22 <./esppcb.pdf>]
-<stmsch.pdf, id=268, 845.0531pt x 597.52838pt>
+<stmsch.pdf, id=272, 845.0531pt x 597.52838pt>
 File: stmsch.pdf Graphic file (type pdf)
 <use stmsch.pdf>
 Package pdftex.def Info: stmsch.pdf  used on input line 422.
@@ -943,7 +936,7 @@ Package pdftex.def Info: stmsch.pdf  used on input line 422.
 
 
 [23 <./esp3d.png>]
-<stmpcb.pdf, id=274, 313.17pt x 233.87375pt>
+<stmpcb.pdf, id=278, 313.17pt x 233.87375pt>
 File: stmpcb.pdf Graphic file (type pdf)
 <use stmpcb.pdf>
 Package pdftex.def Info: stmpcb.pdf  used on input line 428.
@@ -951,7 +944,7 @@ Package pdftex.def Info: stmpcb.pdf  used on input line 428.
 
 
 [24 <./stmsch.pdf>]
-<stm3d.png, id=286, 1729.46124pt x 895.345pt>
+<stm3d.png, id=290, 1729.46124pt x 895.345pt>
 File: stm3d.png Graphic file (type png)
 <use stm3d.png>
 Package pdftex.def Info: stm3d.png  used on input line 434.
@@ -965,30 +958,23 @@ Package pdftex.def Info: stm3d.png  used on input line 434.
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
  ***********
-
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: 48F0A950847ECFA46AB1F91D49066637;2180.
  ) 
 Here is how much of TeX's memory you used:
- 23789 strings out of 467747
- 467447 string characters out of 5431117
- 863123 words of memory out of 5000000
- 52081 multiletter control sequences out of 15000+600000
+ 23787 strings out of 467747
+ 467432 string characters out of 5431117
+ 863196 words of memory out of 5000000
+ 52079 multiletter control sequences out of 15000+600000
  658206 words of font info for 62 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,9n,132p,2037b,1107s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2025/texmf-dist/fonts/type1/public/tex-gyre/qhvb.pfb><c:/texlive/
 2025/texmf-dist/fonts/type1/public/tex-gyre/qhvr.pfb>
-Output written on report.pdf (27 pages, 2538539 bytes).
+Output written on report.pdf (27 pages, 2538528 bytes).
 PDF statistics:
- 330 PDF objects out of 1000 (max. 8388607)
- 265 compressed objects within 3 object streams
+ 333 PDF objects out of 1000 (max. 8388607)
+ 268 compressed objects within 3 object streams
  64 named destinations out of 1000 (max. 500000)
  205 words of extra memory for PDF output out of 10000 (max. 10000000)
 
