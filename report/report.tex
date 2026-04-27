@@ -104,44 +104,45 @@ Other inspirations for the car came from the project requirements themselves. Si
 The electrical block diagram is shown in \autoref{fig:ebd}.
 \begin{figure}
     \centering
-    \begin{tikzpicture}[thick,>={Stealth}]
-        \draw
-        (0,0) node[draw,rectangle,align=center](bat){Battery\\12 V}
-        (0,-2) node[draw,rectangle,align=center](buck){Buck Converter\\AP63205WU-7}
-        (0,-4) node[draw,rectangle,align=center](esp){MCU\\ESP32-WROOM-32}
-        (0,-6) node[draw,rectangle,align=center](h){Headlights}
-        (8,2) node[draw,rectangle,align=center](md1){Motor Driver\\DRV8251ADDAR}
-        (12,2) node[draw,rectangle,align=center](m1){Motor\\PAN14EE12MD}
-        (8,0) node[draw,rectangle,align=center](md2){Motor Driver\\DRV8251ADDAR}
-        (12,0) node[draw,rectangle,align=center](m2){Motor\\PAN14EE12MD}
-        (8,-10) node[draw,rectangle,align=center](stm){MCU\\STM32F446RE}
-        (0,-8) node[draw,rectangle,align=center](us){Ultrasonic Sensor\\HC-SR04}
-        (0,-10) node[draw,rectangle,align=center](scr){Display Screen\\LCD1602}
-        (8,-8) node[draw,rectangle,align=center](t){Timer\\NA555DR}
-        (12,-8) node[draw,rectangle,align=center](c){Metal Coil}
-        (12,-10) node[draw,rectangle,align=center](b){Buzzer\\CMI-0955-03TH};
-        \draw[<->] (stm.north) -- (t.south);
-        \draw[->] (stm.east) -- (b.west);
-        \draw[<->] (t.east) -- (c.west);
-        \draw[->] (bat.east) -- ++(4,0) |- (md1.west);
-        \draw[->] (bat.east) -- ++(4,0) |- (md2.west);
-        \draw[->] (esp.south) -- (h.north);
-        \draw[->] (bat.south) -- (buck.north);
-        \draw[->] (buck.south) -- (esp.north);
-        \draw[->] (buck.west) -- ++(-1,0) -- ++(0,-10) -| (stm.south);
-        \draw[->] (esp.east) -- ++(2,0) |- ($(md1.west)+(0,+.25)$);
-        \draw[->] (esp.east) -| (md2.south);
-        \draw[->] (stm.west) -- ++(-2,0) |- (scr.east);
-        \draw[<-] ($(stm.west)+(0,.25)$) -- ++(-2,0) |- (us.east);
-        \draw[->] (md1.east) -- (m1.west);
-        \draw[->] (md2.east) -- (m2.west);
-    \end{tikzpicture}
+    % \begin{tikzpicture}[thick,>={Stealth}]
+    %     \draw
+    %     (0,0) node[draw,rectangle,align=center](bat){Battery\\12 V}
+    %     (0,-2) node[draw,rectangle,align=center](buck){Buck Converter\\AP63205WU-7}
+    %     (0,-4) node[draw,rectangle,align=center](esp){MCU\\ESP32-WROOM-32}
+    %     (0,-6) node[draw,rectangle,align=center](h){Headlights}
+    %     (8,2) node[draw,rectangle,align=center](md1){Motor Driver\\DRV8251ADDAR}
+    %     (12,2) node[draw,rectangle,align=center](m1){Motor\\PAN14EE12MD}
+    %     (8,0) node[draw,rectangle,align=center](md2){Motor Driver\\DRV8251ADDAR}
+    %     (12,0) node[draw,rectangle,align=center](m2){Motor\\PAN14EE12MD}
+    %     (8,-10) node[draw,rectangle,align=center](stm){MCU\\STM32F446RE}
+    %     (0,-8) node[draw,rectangle,align=center](us){Ultrasonic Sensor\\HC-SR04}
+    %     (0,-10) node[draw,rectangle,align=center](scr){Display Screen\\LCD1602}
+    %     (8,-8) node[draw,rectangle,align=center](t){Timer\\NA555DR}
+    %     (12,-8) node[draw,rectangle,align=center](c){Metal Coil}
+    %     (12,-10) node[draw,rectangle,align=center](b){Buzzer\\CMI-0955-03TH};
+    %     \draw[<->] (stm.north) -- (t.south);
+    %     \draw[->] (stm.east) -- (b.west);
+    %     \draw[<->] (t.east) -- (c.west);
+    %     \draw[->] (bat.east) -- ++(4,0) |- (md1.west);
+    %     \draw[->] (bat.east) -- ++(4,0) |- (md2.west);
+    %     \draw[->] (esp.south) -- (h.north);
+    %     \draw[->] (bat.south) -- (buck.north);
+    %     \draw[->] (buck.south) -- (esp.north);
+    %     \draw[->] (buck.west) -- ++(-1,0) -- ++(0,-10) -| (stm.south);
+    %     \draw[->] (esp.east) -- ++(2,0) |- ($(md1.west)+(0,+.25)$);
+    %     \draw[->] (esp.east) -| (md2.south);
+    %     \draw[->] (stm.west) -- ++(-2,0) |- (scr.east);
+    %     \draw[<-] ($(stm.west)+(0,.25)$) -- ++(-2,0) |- (us.east);
+    %     \draw[->] (md1.east) -- (m1.west);
+    %     \draw[->] (md2.east) -- (m2.west);
+    % \end{tikzpicture}
+    \includegraphics[width=\textwidth]{ebd.pdf}
     \caption{Electrical block diagram for the design}
     \label{fig:ebd}
 \end{figure}
 
 \subsection{Metal Detector, Distance Sensing, and Motor Drive Circuits}
-For the metal detection circuit, many designs were researched before finding the one that we decided to use. The main differences between them were the type of coil used to detect metal and the circuitry used to generate the signal. The different types of coils included transmit/receive coils, coils wrapped around a ferrite core and single coils. As for the generation, the options were between a 555 timer, a transistor setup, and a CD4011 NAND gate. For our first iteration of the metal detector, we went with a 555 timer and a single coil design because all of the components were readily available in the school, and the design for the circuit was the simplest of all the options. The metal detection circuit obtained from \textbf{REFERENCEEEEEEEEEEEEEEEE} is shown in \autoref{mdc1}.
+For the metal detection circuit, many designs were researched before finding the one that we decided to use. The main differences between them were the type of coil used to detect metal and the circuitry used to generate the signal. The different types of coils included transmit/receive coils, coils wrapped around a ferrite core and single coils. As for the generation, the options were between a 555 timer, a transistor setup, and a CD4011 NAND gate. For our first iteration of the metal detector, we went with a 555 timer and a single coil design because all of the components were readily available in the school, and the design for the circuit was the simplest of all the options. The metal detection circuit obtained from [2] is shown in \autoref{mdc1}.
 
 \begin{figure}
     \centering
@@ -237,6 +238,22 @@ The software block diagram for the movement systems of the design is shown in \a
     \end{tikzpicture}
     \caption{Software block diagram for the movement of the design}
     \label{sbdesp}
+\end{figure}
+
+The software block diagram for the STM32 MCU is shown in \autoref{fig:stmf1} and \autoref{fig:stmf2}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=.5\textwidth]{stmf1.png}
+    \caption{Software block diagram for the STM32 (1)}
+    \label{fig:stmf1}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=.5\textwidth]{stmfl2.png}
+    \caption{Software block diagram for the STM32 (2)}
+    \label{fig:stmf2}
 \end{figure}
 \subsection{Software Design}
 Our vehicles design includes both the STM32 and the ESP32-Wroom-32E microcontrollers. Our deviation from the STM32 was made mainly for our controller design as we wanted it to be virtual and through WIFI. Additionally, the ESP32 allowed for more space on our car, and we overall felt more comfortable working with the ESP32 and its code environment. The software used with the ESP32 was through the ESP-IDF extension on Visual Studio Code (VS Code) and the main peripherals that were configured were GPIO, LEDC, WIFI, and DAC. GPIO pins were assigned as output to control the motor directions and to toggle the LED output. Input GPIO pins were defined for current sensing applications as well, although we did not use them in our final iteration. Moreover, the LEDC peripheral was used to control the speed of the motors through PWM. Our motors were configured at a frequency of 5kHz and an 8-bit resolution. Additionally, a DAC channel was used to allow for easy testing of our metal detection circuit as it could adjust the baseline frequency used to read the copper plate. This was a necessary step for testing our metal detection circuit as our original circuit design was inaccurate and allowed us to more easily determine the issues with our circuit like cold solder joints and too few copper coil turns. Lastly, WIFI was configured to provide a wireless network signal for the user’s device to access the web server and control the car. Communication between the remote control and the ESP32 was defined using WIFI and HTTP requests to the microcontroller. Through the wireless network that the ESP32 hosts itself, a web server can be accessed that receives HTTP requests from the user. These requests are handled and processed to output the desired action.
@@ -357,13 +374,25 @@ Something that could be improved with the vehicle is the overall size, as compar
 \newpage
 
 \section{References}
-[1] Espressif Systems, "ESP32-WROOM-32E \& ESP32-WROOM-32UE Datasheet", Version 2.0, Datasheet, 2021. [Online]. Available: \href{https://espressif.com/documentation/esp32-wroom-32e_esp32-wroom-32ue_datasheet_en.pdf}{https://espressif.com/documentation/esp32-wroom-32e\_esp32-wroom-32ue\_datasheet\_en.pdf}
+[1] Espressif Systems, "ESP32-WROOM-32E \& ESP32-WROOM-32UE Datasheet", Version 2.0, Datasheet, 2021. [Online]. Available:
+\vspace{-.5\baselineskip}
 
-[2] Team Analog, “Simple metal detector circuit using IC 555,” TheoryCircuit, Feb. 28, 2024. [Online]. Available: \href{https://theorycircuit.com/ic-555-ic-741/simple-metal-detector-circuit-using-ic-555/}{https://theorycircuit.com/ic-555-ic-741/simple-metal-detector-circuit-using-ic-555/}
+\href{https://espressif.com/documentation/esp32-wroom-32e_esp32-wroom-32ue_datasheet_en.pdf}{https://espressif.com/documentation/esp32-wroom-32e\_esp32-wroom-32ue\_datasheet\_en.pdf}
 
-[3] STMicroelectronics, “STM32F446xC/E datasheet,” STMicroelectronics, 2016. [Online]. Available: \href{https://www.st.com/resource/en/datasheet/stm32f446mc.pdf}{https://www.st.com/resource/en/datasheet/stm32f446mc.pdf}
+[2] Team Analog, “Simple metal detector circuit using IC 555,” TheoryCircuit, Feb. 28, 2024. [Online]. Available:
+\vspace{-.5\baselineskip}
 
-[4] Sysprogs, “STM32 HAL libraries and samples,” SourceVu, [Online]. Available: \href{https://sourcevu.sysprogs.com/stm32/HAL/}{https://sourcevu.sysprogs.com/stm32/HAL/}
+\href{https://theorycircuit.com/ic-555-ic-741/simple-metal-detector-circuit-using-ic-555/}{https://theorycircuit.com/ic-555-ic-741/simple-metal-detector-circuit-using-ic-555/}
+
+[3] STMicroelectronics, “STM32F446xC/E datasheet,” STMicroelectronics, 2016. [Online]. Available:
+\vspace{-.5\baselineskip}
+
+\href{https://www.st.com/resource/en/datasheet/stm32f446mc.pdf}{https://www.st.com/resource/en/datasheet/stm32f446mc.pdf}
+
+[4] Sysprogs, “STM32 HAL libraries and samples,” SourceVu, [Online]. Available:
+\vspace{-.5\baselineskip}
+
+\href{https://sourcevu.sysprogs.com/stm32/HAL/}{https://sourcevu.sysprogs.com/stm32/HAL/}
 
 \newpage
 
